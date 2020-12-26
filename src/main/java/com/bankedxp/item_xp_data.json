@@ -1,0 +1,224 @@
+{
+  "items": [
+    {
+      "id": 13447,
+      "xp": 130,
+      "skill": "prayer"
+    },
+    {
+      "id": 13450,
+      "xp": 182,
+      "skill": "prayer"
+    },
+    {
+      "id": 13453,
+      "xp": 286,
+      "skill": "prayer"
+    },
+    {
+      "id": 13456,
+      "xp": 364,
+      "skill": "prayer"
+    },
+    {
+      "id": 13459,
+      "xp": 454,
+      "skill": "prayer"
+    },
+    {
+      "id": 13462,
+      "xp": 480,
+      "skill": "prayer"
+    },
+    {
+      "id": 13465,
+      "xp": 494,
+      "skill": "prayer"
+    },
+    {
+      "id": 13468,
+      "xp": 520,
+      "skill": "prayer"
+    },
+    {
+      "id": 13471,
+      "xp": 584,
+      "skill": "prayer"
+    },
+    {
+      "id": 13474,
+      "xp": 650,
+      "skill": "prayer"
+    },
+    {
+      "id": 13477,
+      "xp": 716,
+      "skill": "prayer"
+    },
+    {
+      "id": 13480,
+      "xp": 754,
+      "skill": "prayer"
+    },
+    {
+      "id": 13483,
+      "xp": 780,
+      "skill": "prayer"
+    },
+    {
+      "id": 13486,
+      "xp": 832,
+      "skill": "prayer"
+    },
+    {
+      "id": 13489,
+      "xp": 884,
+      "skill": "prayer"
+    },
+    {
+      "id": 13492,
+      "xp": 936,
+      "skill": "prayer"
+    },
+    {
+      "id": 13495,
+      "xp": 1040,
+      "skill": "prayer"
+    },
+    {
+      "id": 13498,
+      "xp": 1104,
+      "skill": "prayer"
+    },
+    {
+      "id": 13501,
+      "xp": 1170,
+      "skill": "prayer"
+    },
+    {
+      "id": 13504,
+      "xp": 1234,
+      "skill": "prayer"
+    },
+    {
+      "id": 13507,
+      "xp": 1300,
+      "skill": "prayer"
+    },
+    {
+      "id": 13510,
+      "xp": 1560,
+      "skill": "prayer"
+    },
+    {
+      "id": 526,
+      "xp": 15.7,
+      "skill": "prayer"
+    },
+    {
+      "id": 528,
+      "xp": 15.7,
+      "skill": "prayer"
+    },
+    {
+      "id": 530,
+      "xp": 18.5,
+      "skill": "prayer"
+    },
+    {
+      "id": 532,
+      "xp": 52.5,
+      "skill": "prayer"
+    },
+    {
+      "id": 534,
+      "xp": 105,
+      "skill": "prayer"
+    },
+    {
+      "id": 536,
+      "xp": 252,
+      "skill": "prayer"
+    },
+    {
+      "id": 22780,
+      "xp": 175,
+      "skill": "prayer"
+    },
+    {
+      "id": 22783,
+      "xp": 280,
+      "skill": "prayer"
+    },
+    {
+      "id": 22786,
+      "xp": 385,
+      "skill": "prayer"
+    },
+    {
+      "id": 6812,
+      "xp": 252,
+      "skill": "prayer"
+    },
+    {
+      "id": 11943,
+      "xp": 297.5,
+      "skill": "prayer"
+    },
+    {
+      "id": 6729,
+      "xp": 437.5,
+      "skill": "prayer"
+    },
+    {
+      "id": 22124,
+      "xp": 525,
+      "skill": "prayer"
+    },
+    {
+      "id": 2351,
+      "xp": 25,
+      "skill": "smithing"
+    },
+    {
+      "id": 2353,
+      "xp": 37.5,
+      "skill": "smithing"
+    },
+    {
+      "id": 2359,
+      "xp": 50,
+      "skill": "smithing"
+    },
+    {
+      "id": 2361,
+      "xp": 62.5,
+      "skill": "smithing"
+    },
+    {
+      "id": 2363,
+      "xp": 75,
+      "skill": "smithing"
+    },
+    {
+      "id": 960,
+      "xp": 29,
+      "skill": "construction"
+    },
+    {
+      "id": 8778,
+      "xp": 60,
+      "skill": "construction"
+    },
+    {
+      "id": 8780,
+      "xp": 90,
+      "skill": "construction"
+    },
+    {
+      "id": 8782,
+      "xp": 140,
+      "skill": "construction"
+    }
+  ]
+}
