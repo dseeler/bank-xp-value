@@ -219,6 +219,651 @@
       "id": 8782,
       "xp": 140,
       "skill": "construction"
+    },
+    {
+      "id": 1617,
+      "xp": 107.5,
+      "skill": "crafting"
+    },
+    {
+      "id": 1619,
+      "xp": 85,
+      "skill": "crafting"
+    },
+    {
+      "id": 1621,
+      "xp": 67.5,
+      "skill": "crafting"
+    },
+    {
+      "id": 1623,
+      "xp": 50,
+      "skill": "crafting"
+    },
+    {
+      "id": 1631,
+      "xp": 137.5,
+      "skill": "crafting"
+    },
+    {
+      "id": 1391,
+      "xp": 137.5,
+      "skill": "crafting"
+    },
+    {
+      "id": 1753,
+      "xp": 62,
+      "skill": "crafting"
+    },
+    {
+      "id": 1745,
+      "xp": 62,
+      "skill": "crafting"
+    },
+    {
+      "id": 1751,
+      "xp": 70,
+      "skill": "crafting"
+    },
+    {
+      "id": 2505,
+      "xp": 70,
+      "skill": "crafting"
+    },
+    {
+      "id": 1749,
+      "xp": 78,
+      "skill": "crafting"
+    },
+    {
+      "id": 2507,
+      "xp": 78,
+      "skill": "crafting"
+    },
+    {
+      "id": 1747,
+      "xp": 86,
+      "skill": "crafting"
+    },
+    {
+      "id": 2509,
+      "xp": 86,
+      "skill": "crafting"
+    },
+    {
+      "id": 24260,
+      "xp": 52.5,
+      "skill": "crafting"
+    },
+    {
+      "id": 819,
+      "xp": 1.8,
+      "skill": "fletching"
+    },
+    {
+      "id": 820,
+      "xp": 3.8,
+      "skill": "fletching"
+    },
+    {
+      "id": 821,
+      "xp": 7.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 822,
+      "xp": 11.2,
+      "skill": "fletching"
+    },
+    {
+      "id": 823,
+      "xp": 15,
+      "skill": "fletching"
+    },
+    {
+      "id": 824,
+      "xp": 18.8,
+      "skill": "fletching"
+    },
+    {
+      "id": 11232,
+      "xp": 25,
+      "skill": "fletching"
+    },
+    {
+      "id": 9375,
+      "xp": 0.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 9377,
+      "xp": 1.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 9378,
+      "xp": 3.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 9379,
+      "xp": 5,
+      "skill": "fletching"
+    },
+    {
+      "id": 9380,
+      "xp": 7,
+      "skill": "fletching"
+    },
+    {
+      "id": 9381,
+      "xp": 10,
+      "skill": "fletching"
+    },
+    {
+      "id": 21930,
+      "xp": 12,
+      "skill": "fletching"
+    },
+    {
+      "id": 11876,
+      "xp": 3,
+      "skill": "fletching"
+    },
+    {
+      "id": 9193,
+      "xp": 8.2,
+      "skill": "fletching"
+    },
+    {
+      "id": 9194,
+      "xp": 9.4,
+      "skill": "fletching"
+    },
+    {
+      "id": 21338,
+      "xp": 10.6,
+      "skill": "fletching"
+    },
+    {
+      "id": 39,
+      "xp": 1.3,
+      "skill": "fletching"
+    },
+    {
+      "id": 40,
+      "xp": 2.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 41,
+      "xp": 5,
+      "skill": "fletching"
+    },
+    {
+      "id": 42,
+      "xp": 7.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 43,
+      "xp": 10,
+      "skill": "fletching"
+    },
+    {
+      "id": 44,
+      "xp": 12.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 21350,
+      "xp": 13.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 11237,
+      "xp": 15,
+      "skill": "fletching"
+    },
+    {
+      "id": 1511,
+      "xp": 40,
+      "skill": "firemaking"
+    },
+    {
+      "id": 1513,
+      "xp": 303.8,
+      "skill": "firemaking"
+    },
+    {
+      "id": 1515,
+      "xp": 202.5,
+      "skill": "firemaking"
+    },
+    {
+      "id": 1517,
+      "xp": 135,
+      "skill": "firemaking"
+    },
+    {
+      "id": 1519,
+      "xp": 90,
+      "skill": "fletching"
+    },
+    {
+      "id": 1521,
+      "xp": 60,
+      "skill": "firemaking"
+    },
+    {
+      "id": 6333,
+      "xp": 105,
+      "skill": "firemaking"
+    },
+    {
+      "id": 6333,
+      "xp": 105,
+      "skill": "firemaking"
+    },
+    {
+      "id": 10810,
+      "xp": 125,
+      "skill": "firemaking"
+    },
+    {
+      "id": 4445,
+      "xp": 157.5,
+      "skill": "firemaking"
+    },
+    {
+      "id": 19669,
+      "xp": 350,
+      "skill": "firemaking"
+    },
+    {
+      "id": 317,
+      "xp": 10,
+      "skill": "cooking"
+    },
+    {
+      "id": 321,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 327,
+      "xp": 40,
+      "skill": "cooking"
+    },
+    {
+      "id": 331,
+      "xp": 90,
+      "skill": "cooking"
+    },
+    {
+      "id": 335,
+      "xp": 70,
+      "skill": "cooking"
+    },
+    {
+      "id": 345,
+      "xp": 50,
+      "skill": "cooking"
+    },
+    {
+      "id": 353,
+      "xp": 60,
+      "skill": "cooking"
+    },
+    {
+      "id": 359,
+      "xp": 100,
+      "skill": "cooking"
+    },
+    {
+      "id": 371,
+      "xp": 140,
+      "skill": "cooking"
+    },
+    {
+      "id": 377,
+      "xp": 120,
+      "skill": "cooking"
+    },
+    {
+      "id": 383,
+      "xp": 210,
+      "skill": "cooking"
+    },
+    {
+      "id": 389,
+      "xp": 216.3,
+      "skill": "cooking"
+    },
+    {
+      "id": 395,
+      "xp": 211.3,
+      "skill": "cooking"
+    },
+    {
+      "id": 13439,
+      "xp": 230,
+      "skill": "cooking"
+    },
+    {
+      "id": 7944,
+      "xp": 120,
+      "skill": "cooking"
+    },
+    {
+      "id": 3142,
+      "xp": 190,
+      "skill": "cooking"
+    },
+    {
+      "id": 1987,
+      "xp": 200,
+      "skill": "cooking"
+    },
+    {
+      "id": 5312,
+      "xp": 481.3,
+      "skill": "farming"
+    },
+    {
+      "id": 5313,
+      "xp": 1481.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5314,
+      "xp": 3448.4,
+      "skill": "farming"
+    },
+    {
+      "id": 5315,
+      "xp": 7150.9,
+      "skill": "farming"
+    },
+    {
+      "id": 5316,
+      "xp": 13913.8,
+      "skill": "farming"
+    },
+    {
+      "id": 5317,
+      "xp": 19301.8,
+      "skill": "farming"
+    },
+    {
+      "id": 5371,
+      "xp": 1481.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5372,
+      "xp": 3448.4,
+      "skill": "farming"
+    },
+    {
+      "id": 5373,
+      "xp": 7150.9,
+      "skill": "farming"
+    },
+    {
+      "id": 5734,
+      "xp": 13913.8,
+      "skill": "farming"
+    },
+    {
+      "id": 5375,
+      "xp": 19301.8,
+      "skill": "farming"
+    },
+    {
+      "id": 5283,
+      "xp": 1272.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5284,
+      "xp": 1841.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5285,
+      "xp": 2586.7,
+      "skill": "farming"
+    },
+    {
+      "id": 5286,
+      "xp": 3036.9,
+      "skill": "farming"
+    },
+    {
+      "id": 5287,
+      "xp": 4791.7,
+      "skill": "farming"
+    },
+    {
+      "id": 5288,
+      "xp": 6380.4,
+      "skill": "farming"
+    },
+    {
+      "id": 5289,
+      "xp": 10509.6,
+      "skill": "farming"
+    },
+    {
+      "id": 5290,
+      "xp": 12516.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5503,
+      "xp": 12516.5,
+      "skill": "farming"
+    },
+    {
+      "id": 22877,
+      "xp": 17825,
+      "skill": "farming"
+    },
+    {
+      "id": 22866,
+      "xp": 17825,
+      "skill": "farming"
+    },
+    {
+      "id": 23661,
+      "xp": 13366,
+      "skill": "farming"
+    },
+    {
+      "id": 22869,
+      "xp": 14404.5,
+      "skill": "farming"
+    },
+    {
+      "id": 22856,
+      "xp": 14404.5,
+      "skill": "farming"
+    },
+    {
+      "id": 22871,
+      "xp": 22680,
+      "skill": "farming"
+    },
+    {
+      "id": 22859,
+      "xp": 22680,
+      "skill": "farming"
+    },
+    {
+      "id": 5496,
+      "xp": 1272.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5497,
+      "xp": 1841.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5498,
+      "xp": 2586.7,
+      "skill": "farming"
+    },
+    {
+      "id": 5499,
+      "xp": 3036.9,
+      "skill": "farming"
+    },
+    {
+      "id": 5500,
+      "xp": 4791.7,
+      "skill": "farming"
+    },
+    {
+      "id": 5501,
+      "xp": 6380.4,
+      "skill": "farming"
+    },
+    {
+      "id": 5502,
+      "xp": 10509.6,
+      "skill": "farming"
+    },
+    {
+      "id": 21486,
+      "xp": 7325,
+      "skill": "farming"
+    },
+    {
+      "id": 21477,
+      "xp": 7325,
+      "skill": "farming"
+    },
+    {
+      "id": 21488,
+      "xp": 15783,
+      "skill": "farming"
+    },
+    {
+      "id": 21480,
+      "xp": 15783,
+      "skill": "farming"
+    },
+    {
+      "id": 5291,
+      "xp": 98.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5292,
+      "xp": 118.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5293,
+      "xp": 142,
+      "skill": "farming"
+    },
+    {
+      "id": 5294,
+      "xp": 189.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5295,
+      "xp": 240.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5296,
+      "xp": 303.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5297,
+      "xp": 382.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5298,
+      "xp": 485,
+      "skill": "farming"
+    },
+    {
+      "id": 5299,
+      "xp": 615,
+      "skill": "farming"
+    },
+    {
+      "id": 5300,
+      "xp": 777,
+      "skill": "farming"
+    },
+    {
+      "id": 5301,
+      "xp": 946.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5302,
+      "xp": 1195,
+      "skill": "farming"
+    },
+    {
+      "id": 5303,
+      "xp": 1514.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5304,
+      "xp": 1771,
+      "skill": "farming"
+    },
+    {
+      "id": 5318,
+      "xp": 98,
+      "skill": "farming"
+    },
+    {
+      "id": 5319,
+      "xp": 114.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5320,
+      "xp": 207,
+      "skill": "farming"
+    },
+    {
+      "id": 5321,
+      "xp": 593.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5322,
+      "xp": 152.5,
+      "skill": "farming"
+    },
+    {
+      "id": 5323,
+      "xp": 316,
+      "skill": "farming"
+    },
+    {
+      "id": 5324,
+      "xp": 125,
+      "skill": "farming"
+    },
+    {
+      "id": 22879,
+      "xp": 902,
+      "skill": "farming"
     }
   ]
 }

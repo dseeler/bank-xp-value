@@ -11,6 +11,8 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
+import org.apache.commons.lang3.ArrayUtils;
+
 import javax.inject.Inject;
 import java.util.Arrays;
 
@@ -48,7 +50,6 @@ public class BankedXpPlugin extends Plugin {
 
     @Override
     protected void startUp() throws Exception{
-
     }
 
     @Override
