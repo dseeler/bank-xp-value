@@ -2,8 +2,10 @@ package com.bankedxp;
 
 import com.google.inject.Provides;
 import net.runelite.api.*;
+import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
@@ -11,7 +13,6 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
-import org.apache.commons.lang3.ArrayUtils;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -24,10 +25,6 @@ import java.util.Arrays;
         enabledByDefault = true
 )
 public class BankedXpPlugin extends Plugin {
-
-    private boolean pluginToggled = false;
-
-    private final ItemDataCache data = new ItemDataCache();
 
     @Inject
     private Client client;
@@ -46,7 +43,9 @@ public class BankedXpPlugin extends Plugin {
         return configManager.getConfig(BankedXpConfig.class);
     }
 
-    private ItemContainer itemContainer;
+    private boolean pluginToggled = false;
+    private ItemContainer bankContainer;
+    private final ItemDataCache data = new ItemDataCache();
 
     @Override
     protected void startUp() throws Exception{
@@ -82,6 +81,13 @@ public class BankedXpPlugin extends Plugin {
 
     @Subscribe
     public void onMenuOptionClicked(MenuOptionClicked event){
+        Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        if (bank == null){
+            overlayManager.remove(overlay);
+            pluginToggled = false;
+            return;
+        }
+
         if (event.getWidgetId() != WidgetInfo.BANK_SETTINGS_BUTTON.getId() ||
                 !event.getMenuOption().contains("XP")){
             return;
@@ -90,11 +96,10 @@ public class BankedXpPlugin extends Plugin {
         if (event.getMenuOption().equals("Toggle Banked XP")) {
             if (!pluginToggled){
 
-                itemContainer = client.getItemContainer(InventoryID.BANK);
-                if (itemContainer != null){
-                    overlay.setXpTotals(data.getTotals(itemContainer.getItems()));
+                bankContainer = client.getItemContainer(InventoryID.BANK);
+                if (bankContainer != null){
+                    overlay.setXpTotals(data.getTotals(bankContainer.getItems()));
                 }
-
                 overlayManager.add(overlay);
             }
             else{
@@ -107,6 +112,15 @@ public class BankedXpPlugin extends Plugin {
             entry.setOption("Hide Potential XP");
 
             client.setMenuEntries(entries);
+        }
+    }
+
+    @Subscribe
+    public void onItemContainerChanged(ItemContainerChanged event)
+    {
+        if (event.getContainerId() == InventoryID.BANK.getId()) {
+            bankContainer = client.getItemContainer(InventoryID.BANK);
+            overlay.setXpTotals(data.getTotals(bankContainer.getItems()));
         }
     }
 }

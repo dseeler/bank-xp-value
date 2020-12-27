@@ -13,6 +13,6 @@ public interface BankedXpConfig extends Config{
             description = "Shows the total amount of potential XP available from items in your bank"
     )
     default boolean bankedXp(){
-        return false;
+        return true;
     }
 }

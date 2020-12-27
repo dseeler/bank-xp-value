@@ -37,8 +37,9 @@ public class ItemDataCache {
         skills.put("farming", 3);
         skills.put("firemaking", 4);
         skills.put("fletching", 5);
-        skills.put("prayer", 6);
-        skills.put("smithing", 7);
+        skills.put("herblore", 6);
+        skills.put("prayer", 7);
+        skills.put("smithing", 8);
     }
 
     private void populateCache(){
@@ -63,7 +64,7 @@ public class ItemDataCache {
     }
 
     public double[] getTotals(Item[] items){
-        double[] totals = new double[9];
+        double[] totals = new double[10];
 
         // Initialize array
         for (int i = 0; i < totals.length; i++){
@@ -74,7 +75,7 @@ public class ItemDataCache {
             if (cache.containsKey(items[i].getId())){
                 ItemData data = cache.get(items[i].getId());
                 totals[skills.get(data.skill)] += data.xp * items[i].getQuantity();
-                totals[8] += data.xp * items[i].getQuantity();
+                totals[9] += data.xp * items[i].getQuantity();
             }
         }
         return totals;

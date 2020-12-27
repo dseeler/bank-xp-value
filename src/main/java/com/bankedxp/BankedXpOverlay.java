@@ -1,6 +1,8 @@
 package com.bankedxp;
 
 import net.runelite.api.*;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.components.*;
@@ -13,7 +15,7 @@ public class BankedXpOverlay extends OverlayPanel {
     private final Client client;
     private final ItemManager itemManager;
     private final BankedXpConfig config;
-    private final static String[] xpTotals = new String[9];
+    private final static String[] xpTotals = new String[10];
 
     @Inject
     private BankedXpOverlay(Client client, ItemManager itemManager, BankedXpConfig config){
@@ -23,7 +25,7 @@ public class BankedXpOverlay extends OverlayPanel {
         setPosition(OverlayPosition.TOP_CENTER);
 
         panelComponent.setPreferredLocation(new Point(0, 85));
-        panelComponent.setBackgroundColor(new Color(51, 51, 51, 245));
+        panelComponent.setBackgroundColor(new Color(62, 54, 44, 245));
 
         this.client = client;
         this.itemManager = itemManager;
@@ -32,7 +34,13 @@ public class BankedXpOverlay extends OverlayPanel {
 
     @Override
     public Dimension render(Graphics2D graphics){
+        Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+
         panelComponent.getChildren().clear();
+
+        if (bank == null){
+            return null;
+        }
 
         panelComponent.getChildren().add(TitleComponent.builder()
                 .text("Potential XP Available")
@@ -48,9 +56,10 @@ public class BankedXpOverlay extends OverlayPanel {
         panelComponent.getChildren().add(LineComponent.builder().left("Farming: ").right("" + xpTotals[3]).build());
         panelComponent.getChildren().add(LineComponent.builder().left("Firemaking: ").right("" + xpTotals[4]).build());
         panelComponent.getChildren().add(LineComponent.builder().left("Fletching: ").right("" + xpTotals[5]).build());
-        panelComponent.getChildren().add(LineComponent.builder().left("Prayer: ").right("" + xpTotals[6]).build());
-        panelComponent.getChildren().add(LineComponent.builder().left("Smithing: ").right("" + xpTotals[7]).build());
-        panelComponent.getChildren().add(LineComponent.builder().left("Total: ").right("" + xpTotals[8]).build());
+        panelComponent.getChildren().add(LineComponent.builder().left("Herblore: ").right("" + xpTotals[6]).build());
+        panelComponent.getChildren().add(LineComponent.builder().left("Prayer: ").right("" + xpTotals[7]).build());
+        panelComponent.getChildren().add(LineComponent.builder().left("Smithing: ").right("" + xpTotals[8]).build());
+        panelComponent.getChildren().add(LineComponent.builder().left("Total: ").right("" + xpTotals[9]).build());
 
         return super.render(graphics);
     }
@@ -61,7 +70,7 @@ public class BankedXpOverlay extends OverlayPanel {
                 xpTotals[i] = "None";
             }
             else{
-                xpTotals[i] = String.format("%,d", (int)totals[i]);
+                xpTotals[i] = String.format("%,d", (int)Math.ceil(totals[i]));
             }
         }
     }
