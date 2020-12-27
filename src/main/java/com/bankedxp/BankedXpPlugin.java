@@ -9,12 +9,15 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.config.Keybind;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 import javax.inject.Inject;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 @PluginDescriptor(
@@ -38,9 +41,13 @@ public class BankedXpPlugin extends Plugin {
     @Inject
     private BankedXpConfig config;
 
-    private boolean pluginToggled = false;
+    @Inject
+    private ItemDataCache data;
+
+    private static final String CONFIG_GROUP = "bankedxp";
+    private Widget bank;
     private ItemContainer bankContainer;
-    private final ItemDataCache data = new ItemDataCache();
+    private boolean pluginToggled = false;
 
     @Provides
     BankedXpConfig provideConfig(ConfigManager configManager){
@@ -81,7 +88,7 @@ public class BankedXpPlugin extends Plugin {
 
     @Subscribe
     public void onMenuOptionClicked(MenuOptionClicked event){
-        Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
         if (bank == null){
             overlayManager.remove(overlay);
             pluginToggled = false;
@@ -123,4 +130,5 @@ public class BankedXpPlugin extends Plugin {
             overlay.setXpTotals(data.getTotals(bankContainer.getItems()));
         }
     }
+
 }

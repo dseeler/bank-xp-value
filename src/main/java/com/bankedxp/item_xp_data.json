@@ -466,6 +466,191 @@
       "skill": "fletching"
     },
     {
+      "id": 19570,
+      "xp": 1,
+      "skill": "fletching"
+    },
+    {
+      "id": 19572,
+      "xp": 2,
+      "skill": "fletching"
+    },
+    {
+      "id": 19574,
+      "xp": 5,
+      "skill": "fletching"
+    },
+    {
+      "id": 19576,
+      "xp": 8,
+      "skill": "fletching"
+    },
+    {
+      "id": 19578,
+      "xp": 10,
+      "skill": "fletching"
+    },
+    {
+      "id": 19580,
+      "xp": 12.4,
+      "skill": "fletching"
+    },
+    {
+      "id": 19582,
+      "xp": 15,
+      "skill": "fletching"
+    },
+    {
+      "id": 21352,
+      "xp": 13.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 48,
+      "xp": 10,
+      "skill": "fletching"
+    },
+    {
+      "id": 50,
+      "xp": 5,
+      "skill": "fletching"
+    },
+    {
+      "id": 54,
+      "xp": 16.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 56,
+      "xp": 25,
+      "skill": "fletching"
+    },
+    {
+      "id": 58,
+      "xp": 41.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 60,
+      "xp": 33.3,
+      "skill": "fletching"
+    },
+    {
+      "id": 62,
+      "xp": 58.2,
+      "skill": "fletching"
+    },
+    {
+      "id": 64,
+      "xp": 50,
+      "skill": "fletching"
+    },
+    {
+      "id": 66,
+      "xp": 75,
+      "skill": "fletching"
+    },
+    {
+      "id": 68,
+      "xp": 67.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 70,
+      "xp": 91.5,
+      "skill": "fletching"
+    },
+    {
+      "id": 72,
+      "xp": 83,
+      "skill": "fletching"
+    },
+    {
+      "id": 9420,
+      "xp": 12,
+      "skill": "fletching"
+    },
+    {
+      "id": 9423,
+      "xp": 44,
+      "skill": "fletching"
+    },
+    {
+      "id": 9425,
+      "xp": 54,
+      "skill": "fletching"
+    },
+    {
+      "id": 9427,
+      "xp": 64,
+      "skill": "fletching"
+    },
+    {
+      "id": 9429,
+      "xp": 82,
+      "skill": "fletching"
+    },
+    {
+      "id": 9431,
+      "xp": 100,
+      "skill": "fletching"
+    },
+    {
+      "id": 21918,
+      "xp": 135,
+      "skill": "fletching"
+    },
+    {
+      "id": 19595,
+      "xp": 15,
+      "skill": "fletching"
+    },
+    {
+      "id": 19598,
+      "xp": 30,
+      "skill": "fletching"
+    },
+    {
+      "id": 19610,
+      "xp": 600,
+      "skill": "fletching"
+    },
+    {
+      "id": 9454,
+      "xp": 6,
+      "skill": "fletching"
+    },
+    {
+      "id": 9457,
+      "xp": 22,
+      "skill": "fletching"
+    },
+    {
+      "id": 9459,
+      "xp": 27,
+      "skill": "fletching"
+    },
+    {
+      "id": 9461,
+      "xp": 32,
+      "skill": "fletching"
+    },
+    {
+      "id": 9463,
+      "xp": 41,
+      "skill": "fletching"
+    },
+    {
+      "id": 9465,
+      "xp": 50,
+      "skill": "fletching"
+    },
+    {
+      "id": 21921,
+      "xp": 70,
+      "skill": "fletching"
+    },
+    {
       "id": 1511,
       "xp": 40,
       "skill": "firemaking"
@@ -488,7 +673,7 @@
     {
       "id": 1519,
       "xp": 90,
-      "skill": "fletching"
+      "skill": "firemaking"
     },
     {
       "id": 1521,

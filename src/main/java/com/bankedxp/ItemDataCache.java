@@ -3,31 +3,46 @@ package com.bankedxp;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import lombok.AllArgsConstructor;
 import net.runelite.api.Item;
+
+import java.awt.image.BufferedImage;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import com.google.gson.Gson;
+import net.runelite.api.ItemComposition;
+import net.runelite.client.game.ItemManager;
+import net.runelite.client.ui.overlay.components.ImageComponent;
+
+import javax.inject.Inject;
 
 public class ItemDataCache {
 
+    @AllArgsConstructor
     private class ItemData{
         public int id;
         public double xp;
         public String skill;
+    }
 
-        private ItemData(int id, double xp, String skill){
-            this.id = id;
-            this.xp = xp;
-            this.skill = skill;
-        }
+    @AllArgsConstructor
+    public class SkillContents{
+        public double total;
+        public List<ImageComponent> images;
     }
 
     private final static HashMap<String, Integer> skills = new HashMap<>();
     private final static HashMap<Integer, ItemData> cache = new HashMap<>();
+    private final ItemManager itemManager;
 
-    public ItemDataCache(){
+    @Inject
+    public ItemDataCache(ItemManager itemManager){
         mapSkills();
         populateCache();
+        this.itemManager = itemManager;
     }
 
     private void mapSkills(){
@@ -63,22 +78,31 @@ public class ItemDataCache {
         }
     }
 
-    public double[] getTotals(Item[] items){
-        double[] totals = new double[10];
+    public SkillContents[] getTotals(Item[] items){
+        SkillContents[] skillContents = new SkillContents[10];
 
-        // Initialize array
-        for (int i = 0; i < totals.length; i++){
-            totals[i] = 0.0;
+        for (int i = 0; i < skillContents.length; i++){
+            skillContents[i] = new SkillContents(0.0, new ArrayList<>());
         }
 
         for (int i = 0; i < items.length; i++){
             if (cache.containsKey(items[i].getId())){
                 ItemData data = cache.get(items[i].getId());
-                totals[skills.get(data.skill)] += data.xp * items[i].getQuantity();
-                totals[9] += data.xp * items[i].getQuantity();
+
+                // Add the XP to the skill's total
+                skillContents[skills.get(data.skill)].total += data.xp * items[i].getQuantity();
+                skillContents[9].total += data.xp * items[i].getQuantity();
+
+                // Add the image to the skill's tooltip
+                final BufferedImage image = getImage(items[i]);
+                skillContents[skills.get(data.skill)].images.add(new ImageComponent(image));
             }
         }
-        return totals;
+        return skillContents;
     }
 
+    private BufferedImage getImage(Item item){
+        ItemComposition composition = itemManager.getItemComposition(item.getId());
+        return itemManager.getImage(item.getId(), item.getQuantity(), true);
+    }
 }
