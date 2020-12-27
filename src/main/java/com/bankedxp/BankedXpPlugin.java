@@ -38,14 +38,14 @@ public class BankedXpPlugin extends Plugin {
     @Inject
     private BankedXpConfig config;
 
+    private boolean pluginToggled = false;
+    private ItemContainer bankContainer;
+    private final ItemDataCache data = new ItemDataCache();
+
     @Provides
     BankedXpConfig provideConfig(ConfigManager configManager){
         return configManager.getConfig(BankedXpConfig.class);
     }
-
-    private boolean pluginToggled = false;
-    private ItemContainer bankContainer;
-    private final ItemDataCache data = new ItemDataCache();
 
     @Override
     protected void startUp() throws Exception{
