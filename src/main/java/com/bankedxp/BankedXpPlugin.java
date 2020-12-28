@@ -9,20 +9,17 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
-import net.runelite.client.config.Keybind;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
-
 import javax.inject.Inject;
-import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 @PluginDescriptor(
         name = "Banked XP",
-        description = "Shows the total amount of potential XP available from items in your bank",
+        description = "Shows your banked XP in an overlay",
         tags = {"bank", "xp"},
         loadWhenOutdated = true,
         enabledByDefault = true
@@ -47,7 +44,8 @@ public class BankedXpPlugin extends Plugin {
     private static final String CONFIG_GROUP = "bankedxp";
     private Widget bank;
     private ItemContainer bankContainer;
-    private boolean pluginToggled = false;
+    private ItemContainer seedVaultContainer;
+    private static boolean pluginToggled = false;
 
     @Provides
     BankedXpConfig provideConfig(ConfigManager configManager){
@@ -102,11 +100,7 @@ public class BankedXpPlugin extends Plugin {
 
         if (event.getMenuOption().equals("Toggle Banked XP")) {
             if (!pluginToggled){
-
-                bankContainer = client.getItemContainer(InventoryID.BANK);
-                if (bankContainer != null){
-                    overlay.setXpTotals(data.getTotals(bankContainer.getItems()));
-                }
+                calculate();
                 overlayManager.add(overlay);
             }
             else{
@@ -115,20 +109,61 @@ public class BankedXpPlugin extends Plugin {
             pluginToggled = !pluginToggled;
 
             MenuEntry[] entries = client.getMenuEntries();
-            MenuEntry entry = new MenuEntry();
-            entry.setOption("Hide Potential XP");
-
             client.setMenuEntries(entries);
         }
     }
 
     @Subscribe
-    public void onItemContainerChanged(ItemContainerChanged event)
-    {
-        if (event.getContainerId() == InventoryID.BANK.getId()) {
-            bankContainer = client.getItemContainer(InventoryID.BANK);
-            overlay.setXpTotals(data.getTotals(bankContainer.getItems()));
+    public void onItemContainerChanged(ItemContainerChanged event){
+        if (event.getContainerId() == InventoryID.SEED_VAULT.getId() && config.includeSeedVault()){
+            seedVaultContainer = client.getItemContainer(InventoryID.SEED_VAULT);
+        }
+        else if (bank != null && event.getContainerId() == InventoryID.BANK.getId()){
+            calculate();
         }
     }
 
+    @Subscribe
+    public void onConfigChanged(ConfigChanged configChanged){
+        if (configChanged.getKey().equals("bankedxpplugin")){
+            pluginToggled = false;
+        }
+        if (configChanged.getGroup().equals(CONFIG_GROUP) &&
+                configChanged.getKey().equals("includeSeedVault")){
+            calculate();
+        }
+    }
+
+    private void calculate(){
+        bankContainer = client.getItemContainer(InventoryID.BANK);
+        Item items[] = bankContainer.getItems();
+
+        if (config.includeSeedVault() && items != null){
+            items = includeSeedVault(items);
+        }
+
+        overlay.setXpTotals(data.getTotals(items));
+    }
+
+    private Item[] includeSeedVault(Item[] items){
+        ItemContainer container = seedVaultContainer;
+
+        if (container == null || container.size() == 0){
+            return items;
+        }
+
+        Item[] moreItems = Arrays.copyOf(items, items.length + container.size());
+
+        int count = 0;
+        for (int i = items.length; i < moreItems.length; i++){
+            moreItems[i] = container.getItem(count);
+            count++;
+        }
+        return moreItems;
+    }
+
+    public void hideOverlay(){
+        pluginToggled = false;
+        overlayManager.remove(overlay);
+    }
 }

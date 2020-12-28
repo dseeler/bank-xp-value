@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class BankedXpOverlay extends OverlayPanel {
 
     private final Client client;
+    private final BankedXpPlugin plugin;
     private final BankedXpConfig config;
     private final ItemManager itemManager;
     private final TooltipManager tooltipManager;
@@ -29,18 +30,20 @@ public class BankedXpOverlay extends OverlayPanel {
     private final ArrayList<PanelComponent> itemPanels = new ArrayList<>();
 
     @Inject
-    private BankedXpOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager, BankedXpConfig config){
+    private BankedXpOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
+                            BankedXpConfig config, BankedXpPlugin plugin){
+
+        this.client = client;
+        this.plugin = plugin;
+        this.itemManager = itemManager;
+        this.config = config;
+        this.tooltipManager = tooltipManager;
 
         setLayer(OverlayLayer.ALWAYS_ON_TOP);
         setPriority(OverlayPriority.HIGHEST);
         setPosition(OverlayPosition.TOP_CENTER);
 
         panelComponent.setBackgroundColor(new Color(51, 51, 51, 245));
-
-        this.client = client;
-        this.itemManager = itemManager;
-        this.config = config;
-        this.tooltipManager = tooltipManager;
 
         iconManager = new SkillIconManager();
         skillsBar = new PanelComponent();
@@ -54,6 +57,7 @@ public class BankedXpOverlay extends OverlayPanel {
         panelComponent.getChildren().clear();
 
         if (bank == null || bank.isHidden()){
+            plugin.hideOverlay();
             return null;
         }
 
@@ -156,9 +160,15 @@ public class BankedXpOverlay extends OverlayPanel {
     }
 
     private void createTooltips(ItemDataCache.SkillContents[] skillContents){
+        if (itemPanels.size() != 0){
+            itemPanels.clear();
+        }
+
         for (int i = 0; i < skillContents.length; i++){
             PanelComponent panel = new PanelComponent();
             panel.setOrientation(ComponentOrientation.HORIZONTAL);
+            panel.setPreferredSize(new Dimension(250, 0));
+            panel.setWrap(true);
             for (int j = 0; j < skillContents[i].images.size(); j++){
                 panel.getChildren().add(skillContents[i].images.get(j));
             }

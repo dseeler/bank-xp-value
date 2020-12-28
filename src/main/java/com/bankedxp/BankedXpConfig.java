@@ -8,11 +8,11 @@ import net.runelite.client.config.ConfigItem;
 public interface BankedXpConfig extends Config{
     @ConfigItem(
             position = 1,
-            keyName = "bankedXp",
-            name = "Banked XP",
-            description = "Shows the total amount of potential XP available from items in your bank"
+            keyName = "includeSeedVault",
+            name = "Include seed vault",
+            description = "Includes items in your seed vault"
     )
-    default boolean bankedXp(){
+    default boolean includeSeedVault(){
         return true;
     }
 }
