@@ -15,4 +15,14 @@ public interface BankedXpConfig extends Config{
     default boolean includeSeedVault(){
         return true;
     }
+
+    @ConfigItem(
+            position = 3,
+            keyName = "dynamicWindow",
+            name = "Make window movable",
+            description = "Skill Tooltips show text instead of images"
+    )
+    default boolean dynamicWindow(){
+        return false;
+    }
 }

@@ -26,8 +26,9 @@ public class BankedXpOverlay extends OverlayPanel {
     private final TooltipManager tooltipManager;
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
+
     private final static String[] xpTotals = new String[10];
-    private final ArrayList<PanelComponent> itemPanels = new ArrayList<>();
+    private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
 
     @Inject
     private BankedXpOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
@@ -53,6 +54,10 @@ public class BankedXpOverlay extends OverlayPanel {
     @Override
     public Dimension render(Graphics2D graphics){
         Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth()/ 2) - (panelComponent.getBounds().getWidth() / 2));
+        int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (panelComponent.getBounds().getHeight() / 2));
+
+        setPreferredLocation(new Point(x, y));
 
         panelComponent.getChildren().clear();
 
@@ -60,8 +65,6 @@ public class BankedXpOverlay extends OverlayPanel {
             plugin.hideOverlay();
             return null;
         }
-
-        panelComponent.setPreferredLocation(new Point(0, bank.getHeight() / 5 + 9));
 
         panelComponent.getChildren().add(TitleComponent.builder()
                 .text("Potential XP Available")
@@ -73,8 +76,8 @@ public class BankedXpOverlay extends OverlayPanel {
         displayTotals();
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
-        setBounds(graphics, cursor, (int)(bank.getBounds().getCenterX() - 100),
-                bank.getHeight() / 5 + 9 + 188);
+
+        setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
 
         return super.render(graphics);
     }
