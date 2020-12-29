@@ -63,25 +63,25 @@ public class BankedXpTutorialOverlay extends OverlayPanel {
             graphics.drawString("to see your Banked XP", bounds.x + bounds.width + 5, bounds.y + 12);
         }
         else{
-            int x = bounds.x - 309;
-            int y = bank.getHeight() / 2 + 78;
+            int x = bounds.x - 308;
+            int y = bank.getHeight() / 2 + 81;
 
             graphics.setColor(ColorScheme.BRAND_ORANGE);
             graphics.setStroke(new BasicStroke(2));
-            graphics.drawRect(x, y, 200, 25);
+            graphics.drawRect(x, y, 200, 21);
 
             FontMetrics font = graphics.getFontMetrics();
             int width = font.stringWidth("Hover over icons");
 
             graphics.setColor(ColorScheme.DARKER_GRAY_COLOR);
-            graphics.fillRect(x + 206, y - 1, width + 2, 30);
+            graphics.fillRect(x + 205, y - 1, width + 2, 30);
 
             graphics.setColor(ColorScheme.BRAND_ORANGE);
-            graphics.drawString("Hover over icons", x + 206, y + 14);
-            graphics.drawString("to see items", x + 206, y + 26);
+            graphics.drawString("Hover over icons", x + 205, y + 14);
+            graphics.drawString("to see items", x + 205, y + 26);
 
             final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
-            if (new Rectangle(x, y, 200, 25).contains(cursor.getX(), cursor.getY())){
+            if (new Rectangle(x, y, 200, 23).contains(cursor.getX(), cursor.getY())){
                 nextTip = false;
                 plugin.hideTutorial();
             }

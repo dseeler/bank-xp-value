@@ -113,12 +113,14 @@ public class BankedXpPlugin extends Plugin {
         }
 
         if (event.getWidgetId() != WidgetInfo.BANK_SETTINGS_BUTTON.getId() ||
-                !event.getMenuOption().contains("Banked XP")){
+                (!event.getMenuOption().contains("Banked XP") && !event.getMenuOption().contains("tutorial"))){
             return;
         }
 
         if (event.getMenuOption().equals("Disable tutorial")){
             config.setTutorial(false);
+            tutorialOverlay.nextTip = false;
+            overlayManager.remove(tutorialOverlay);
             return;
         }
 
@@ -158,6 +160,7 @@ public class BankedXpPlugin extends Plugin {
         }
 
         if (config.showTutorial()){
+            hideOverlay();
             overlayManager.add(tutorialOverlay);
         }
         else{

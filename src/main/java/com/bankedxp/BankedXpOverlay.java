@@ -26,19 +26,21 @@ public class BankedXpOverlay extends OverlayPanel {
     private final TooltipManager tooltipManager;
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
+    private final BankedXpTutorialOverlay tutorialOverlay;
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
 
     @Inject
     private BankedXpOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
-                            BankedXpConfig config, BankedXpPlugin plugin){
+                            BankedXpConfig config, BankedXpPlugin plugin, BankedXpTutorialOverlay tutorialOverlay){
 
         this.client = client;
         this.plugin = plugin;
         this.itemManager = itemManager;
         this.config = config;
         this.tooltipManager = tooltipManager;
+        this.tutorialOverlay = tutorialOverlay;
 
         setLayer(OverlayLayer.ABOVE_WIDGETS);
         setPriority(OverlayPriority.HIGHEST);
@@ -59,8 +61,14 @@ public class BankedXpOverlay extends OverlayPanel {
 
         panelComponent.getChildren().clear();
 
-        if ((bank == null || bank.isHidden()) && !config.showTutorial()){
+        if (bank == null || bank.isHidden()){
             plugin.hideOverlay();
+
+            if (config.showTutorial()){
+                tutorialOverlay.nextTip = false;
+                plugin.hideTutorial();
+            }
+
             return null;
         }
 
