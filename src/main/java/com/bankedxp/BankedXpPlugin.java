@@ -33,6 +33,9 @@ public class BankedXpPlugin extends Plugin {
     private BankedXpOverlay overlay;
 
     @Inject
+    private BankedXpTutorialOverlay tutorialOverlay;
+
+    @Inject
     private OverlayManager overlayManager;
 
     @Inject
@@ -53,8 +56,16 @@ public class BankedXpPlugin extends Plugin {
     }
 
     @Override
+    protected void startUp() throws Exception{
+        if (config.showTutorial()){
+            overlayManager.add(tutorialOverlay);
+        }
+    }
+
+    @Override
     protected void shutDown() throws Exception{
         overlayManager.remove(overlay);
+        overlayManager.remove(tutorialOverlay);
     }
 
     @Subscribe
@@ -77,6 +88,18 @@ public class BankedXpPlugin extends Plugin {
 
         entries[entries.length - 1] = bankedXp;
 
+        if (config.showTutorial()){
+            entries = Arrays.copyOf(entries, entries.length + 1);
+            MenuEntry tutorial = new MenuEntry();
+            tutorial.setOption("Disable tutorial");
+            tutorial.setTarget("");
+            tutorial.setType(MenuAction.WIDGET_FIFTH_OPTION.getId() + 2000);
+            tutorial.setIdentifier(event.getIdentifier());
+            tutorial.setParam0(event.getActionParam0());
+            tutorial.setParam1(event.getActionParam1());
+            entries[entries.length - 1] = tutorial;
+        }
+
         client.setMenuEntries(entries);
     }
 
@@ -90,11 +113,20 @@ public class BankedXpPlugin extends Plugin {
         }
 
         if (event.getWidgetId() != WidgetInfo.BANK_SETTINGS_BUTTON.getId() ||
-                !event.getMenuOption().equals("Toggle Banked XP")){
+                !event.getMenuOption().contains("Banked XP")){
+            return;
+        }
+
+        if (event.getMenuOption().equals("Disable tutorial")){
+            config.setTutorial(false);
             return;
         }
 
         if (event.getMenuOption().equals("Toggle Banked XP")) {
+            if (config.showTutorial()){
+                tutorialOverlay.nextTip = true;
+            }
+
             if (!pluginToggled){
                 calculate();
                 overlayManager.add(overlay);
@@ -121,6 +153,17 @@ public class BankedXpPlugin extends Plugin {
 
     @Subscribe
     public void onConfigChanged(ConfigChanged configChanged){
+        if (!configChanged.getGroup().equals("bankedxp")){
+            return;
+        }
+
+        if (config.showTutorial()){
+            overlayManager.add(tutorialOverlay);
+        }
+        else{
+            overlayManager.remove(tutorialOverlay);
+        }
+
         if (configChanged.getKey().equals("bankedxpplugin")){
             pluginToggled = false;
         }
@@ -164,5 +207,10 @@ public class BankedXpPlugin extends Plugin {
     public void hideOverlay(){
         pluginToggled = false;
         overlayManager.remove(overlay);
+    }
+
+    public void hideTutorial(){
+        overlayManager.remove(tutorialOverlay);
+        config.setTutorial(false);
     }
 }

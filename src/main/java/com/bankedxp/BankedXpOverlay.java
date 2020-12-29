@@ -40,7 +40,7 @@ public class BankedXpOverlay extends OverlayPanel {
         this.config = config;
         this.tooltipManager = tooltipManager;
 
-        setLayer(OverlayLayer.ALWAYS_ON_TOP);
+        setLayer(OverlayLayer.ABOVE_WIDGETS);
         setPriority(OverlayPriority.HIGHEST);
         setPosition(OverlayPosition.TOP_CENTER);
 
@@ -59,7 +59,7 @@ public class BankedXpOverlay extends OverlayPanel {
 
         panelComponent.getChildren().clear();
 
-        if (bank == null || bank.isHidden()){
+        if ((bank == null || bank.isHidden()) && !config.showTutorial()){
             plugin.hideOverlay();
             return null;
         }
