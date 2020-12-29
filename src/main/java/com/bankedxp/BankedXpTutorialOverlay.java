@@ -47,6 +47,7 @@ public class BankedXpTutorialOverlay extends OverlayPanel {
 
         Rectangle bounds = button.getBounds();
 
+        // If on tutorial step 1/2
         if (!nextTip){
             graphics.setColor(ColorScheme.BRAND_ORANGE);
             graphics.setStroke(new BasicStroke(2));
@@ -62,6 +63,7 @@ public class BankedXpTutorialOverlay extends OverlayPanel {
             graphics.drawString("Right click this button", bounds.x + bounds.width + 5, bounds.y);
             graphics.drawString("to see your Banked XP", bounds.x + bounds.width + 5, bounds.y + 12);
         }
+        // If on tutorial step 2/2
         else{
             int x = bounds.x - 308;
             int y = bank.getHeight() / 2 + 81;

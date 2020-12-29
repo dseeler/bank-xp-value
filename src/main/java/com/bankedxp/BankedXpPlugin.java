@@ -212,6 +212,7 @@ public class BankedXpPlugin extends Plugin {
         overlayManager.remove(overlay);
     }
 
+    // Hides tutorial overlay
     public void hideTutorial(){
         overlayManager.remove(tutorialOverlay);
         config.setTutorial(false);

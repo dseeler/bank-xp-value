@@ -3,6 +3,7 @@ package com.bankedxp;
 import net.runelite.api.*;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.SkillColor;
@@ -16,6 +17,7 @@ import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BankedXpOverlay extends OverlayPanel {
 
@@ -209,6 +211,7 @@ public class BankedXpOverlay extends OverlayPanel {
 
         if (bounds[0].contains(cursor.getX(), cursor.getY())){
             if (itemPanels.get(0).getChildren().size() != 0){
+                tooltipManager.clear();
                 tooltipManager.add(new Tooltip("Construction: " + xpTotals[0] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(0)));
             }
@@ -217,6 +220,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[1].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(1).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Cooking: " + xpTotals[1] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(1)));
@@ -226,6 +230,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[2].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(2).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Crafting: " + xpTotals[2] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(2)));
@@ -235,6 +240,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[3].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(3).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Farming: " + xpTotals[3] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(3)));
@@ -244,6 +250,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[4].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(4).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Firemaking: " + xpTotals[4] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(4)));
@@ -253,6 +260,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[5].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(5).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Fletching: " + xpTotals[5] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(5)));
@@ -262,6 +270,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[6].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(6).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Herblore: " + xpTotals[6] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(6)));
@@ -271,6 +280,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[7].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(7).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Prayer: " + xpTotals[7] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(7)));
@@ -280,6 +290,7 @@ public class BankedXpOverlay extends OverlayPanel {
             }
         }
         else if (bounds[8].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(8).getChildren().size() != 0){
                 tooltipManager.add(new Tooltip("Smithing: " + xpTotals[8] + "xp"));
                 tooltipManager.add(new Tooltip(itemPanels.get(8)));
