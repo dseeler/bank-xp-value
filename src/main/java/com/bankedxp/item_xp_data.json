@@ -216,6 +216,16 @@
       "skill": "smithing"
     },
     {
+      "id": 449,
+      "xp": 37.5,
+      "skill": "smithing"
+    },
+    {
+      "id": 451,
+      "xp": 125,
+      "skill": "smithing"
+    },
+    {
       "id": 960,
       "xp": 29,
       "skill": "construction"
@@ -244,6 +254,11 @@
       "id": 10977,
       "xp": 6750,
       "skill": "construction"
+    },
+    {
+      "id": 21504,
+      "xp": 60,
+      "skill": "crafting"
     },
     {
       "id": 1617,
@@ -791,6 +806,81 @@
       "skill": "cooking"
     },
     {
+      "id": 2317,
+      "xp": 130,
+      "skill": "cooking"
+    },
+    {
+      "id": 2319,
+      "xp": 110,
+      "skill": "cooking"
+    },
+    {
+      "id": 2321,
+      "xp": 78,
+      "skill": "cooking"
+    },
+    {
+      "id": 19656,
+      "xp": 180,
+      "skill": "cooking"
+    },
+    {
+      "id": 21684,
+      "xp": 200,
+      "skill": "cooking"
+    },
+    {
+      "id": 22789,
+      "xp": 220,
+      "skill": "cooking"
+    },
+    {
+      "id": 7216,
+      "xp": 260,
+      "skill": "cooking"
+    },
+    {
+      "id": 7196,
+      "xp": 210,
+      "skill": "cooking"
+    },
+    {
+      "id": 2132,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 4289,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 349,
+      "xp": 80,
+      "skill": "cooking"
+    },
+    {
+      "id": 2287,
+      "xp": 143,
+      "skill": "cooking"
+    },
+    {
+      "id": 5986,
+      "xp": 104,
+      "skill": "cooking"
+    },
+    {
+      "id": 2138,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 9978,
+      "xp": 62,
+      "skill": "cooking"
+    },
+    {
       "id": 5312,
       "xp": 481.3,
       "skill": "farming"
@@ -1091,6 +1181,11 @@
       "skill": "farming"
     },
     {
+      "id": 21490,
+      "xp": 649,
+      "skill": "farming"
+    },
+    {
       "id": 199,
       "xp": 32.5,
       "skill": "herblore"
@@ -1328,6 +1423,11 @@
     {
       "id": 21975,
       "xp": 130,
+      "skill": "herblore"
+    },
+    {
+      "id": 22405,
+      "xp": 155,
       "skill": "herblore"
     }
   ]

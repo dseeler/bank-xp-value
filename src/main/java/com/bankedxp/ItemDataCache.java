@@ -1,22 +1,20 @@
 package com.bankedxp;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import lombok.AllArgsConstructor;
-import net.runelite.api.Item;
 
-import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.HashMap;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.gson.Gson;
+import net.runelite.api.Item;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
+import java.awt.image.BufferedImage;
 import net.runelite.api.ItemComposition;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
-
+import lombok.AllArgsConstructor;
 import javax.inject.Inject;
 
 public class ItemDataCache {
@@ -57,6 +55,7 @@ public class ItemDataCache {
         skills.put("smithing", 8);
     }
 
+    // Stores json data in hashmap
     private void populateCache(){
         try{
             Gson gson = new Gson();
@@ -78,6 +77,7 @@ public class ItemDataCache {
         }
     }
 
+    // Computes the total xp for each skill
     public SkillContents[] getTotals(Item[] items){
         SkillContents[] skillContents = new SkillContents[10];
 
@@ -96,6 +96,9 @@ public class ItemDataCache {
                 // Add the image to the skill's tooltip
                 final BufferedImage image = getImage(items[i]);
                 skillContents[skills.get(data.skill)].images.add(new ImageComponent(image));
+                if (skillContents[skills.get(data.skill)].equals("herblore")){
+                    System.out.println(items[i].getId());
+                }
             }
         }
         return skillContents;

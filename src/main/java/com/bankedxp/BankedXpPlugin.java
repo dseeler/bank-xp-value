@@ -1,25 +1,25 @@
 package com.bankedxp;
 
-import com.google.inject.Provides;
 import net.runelite.api.*;
-import net.runelite.api.events.ItemContainerChanged;
-import net.runelite.api.events.MenuEntryAdded;
-import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetID;
-import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.client.config.ConfigManager;
-import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.events.MenuEntryAdded;
+import net.runelite.client.config.ConfigManager;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.eventbus.Subscribe;
+import com.google.inject.Provides;
 import javax.inject.Inject;
 import java.util.Arrays;
 
 @PluginDescriptor(
         name = "Banked XP",
-        description = "Shows your banked XP in an overlay",
+        description = "Shows your banked XP",
         tags = {"bank", "xp"},
         loadWhenOutdated = true,
         enabledByDefault = true
@@ -41,19 +41,15 @@ public class BankedXpPlugin extends Plugin {
     @Inject
     private ItemDataCache data;
 
-    private static final String CONFIG_GROUP = "bankedxp";
     private Widget bank;
     private ItemContainer bankContainer;
     private ItemContainer seedVaultContainer;
-    private static boolean pluginToggled = false;
+    private boolean pluginToggled = false;
+    private static final String CONFIG_GROUP = "bankedxp";
 
     @Provides
     BankedXpConfig provideConfig(ConfigManager configManager){
         return configManager.getConfig(BankedXpConfig.class);
-    }
-
-    @Override
-    protected void startUp() throws Exception{
     }
 
     @Override
@@ -94,7 +90,7 @@ public class BankedXpPlugin extends Plugin {
         }
 
         if (event.getWidgetId() != WidgetInfo.BANK_SETTINGS_BUTTON.getId() ||
-                !event.getMenuOption().contains("XP")){
+                !event.getMenuOption().equals("Toggle Banked XP")){
             return;
         }
 
@@ -134,17 +130,7 @@ public class BankedXpPlugin extends Plugin {
         }
     }
 
-    private void calculate(){
-        bankContainer = client.getItemContainer(InventoryID.BANK);
-        Item items[] = bankContainer.getItems();
-
-        if (config.includeSeedVault() && items != null){
-            items = includeSeedVault(items);
-        }
-
-        overlay.setXpTotals(data.getTotals(items));
-    }
-
+    // Includes seed vault items if config set
     private Item[] includeSeedVault(Item[] items){
         ItemContainer container = seedVaultContainer;
 
@@ -162,6 +148,19 @@ public class BankedXpPlugin extends Plugin {
         return moreItems;
     }
 
+    // Sends bank data to calculate totals
+    private void calculate(){
+        bankContainer = client.getItemContainer(InventoryID.BANK);
+        Item items[] = bankContainer.getItems();
+
+        if (config.includeSeedVault() && items != null){
+            items = includeSeedVault(items);
+        }
+
+        overlay.setXpTotals(data.getTotals(items));
+    }
+
+    // Hides overlay on hidden detection
     public void hideOverlay(){
         pluginToggled = false;
         overlayManager.remove(overlay);

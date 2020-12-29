@@ -46,6 +46,8 @@ public class BankedXpOverlay extends OverlayPanel {
 
         panelComponent.setBackgroundColor(new Color(51, 51, 51, 245));
 
+        setPreferredLocation(new Point(50, 50));
+
         iconManager = new SkillIconManager();
         skillsBar = new PanelComponent();
         createSkillsBar();
@@ -54,10 +56,6 @@ public class BankedXpOverlay extends OverlayPanel {
     @Override
     public Dimension render(Graphics2D graphics){
         Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
-        int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth()/ 2) - (panelComponent.getBounds().getWidth() / 2));
-        int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (panelComponent.getBounds().getHeight() / 2));
-
-        setPreferredLocation(new Point(x, y));
 
         panelComponent.getChildren().clear();
 
@@ -73,15 +71,19 @@ public class BankedXpOverlay extends OverlayPanel {
         panelComponent.setPreferredSize(new Dimension(
                 graphics.getFontMetrics().stringWidth("Total Potential XP Available") + 50, 0));
 
+        int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
+        int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
+        setPreferredLocation(new Point(x, y));
+
         displayTotals();
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
-
         setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
 
         return super.render(graphics);
     }
 
+    // Sets the calculated XP totals
     public void setXpTotals(ItemDataCache.SkillContents[] skillContents){
         for (int i = 0; i < skillContents.length; i++){
             if ((int)skillContents[i].total == 0){
@@ -94,6 +96,7 @@ public class BankedXpOverlay extends OverlayPanel {
         createTooltips(skillContents);
     }
 
+    // Displays each total and corresponding skill
     private void displayTotals(){
         panelComponent.getChildren().add(LineComponent.builder()
                 .left("Construction: ")
@@ -147,6 +150,7 @@ public class BankedXpOverlay extends OverlayPanel {
         panelComponent.getChildren().add(skillsBar);
     }
 
+    // Creates the skill bar component (used to see included items)
     private void createSkillsBar(){
         skillsBar.setGap(new Point(6, 0));
         skillsBar.setBackgroundColor(Color.DARK_GRAY);
@@ -162,6 +166,7 @@ public class BankedXpOverlay extends OverlayPanel {
         skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.SMITHING, true)));
     }
 
+    // Creates the tooltips that appear when hovering over skill bar
     private void createTooltips(ItemDataCache.SkillContents[] skillContents){
         if (itemPanels.size() != 0){
             itemPanels.clear();
@@ -179,6 +184,7 @@ public class BankedXpOverlay extends OverlayPanel {
         }
     }
 
+    // Creates the hover bounds for each skill bar icon
     private Rectangle2D[] createBounds(Graphics2D graphics, int x, int y){
         Rectangle2D bounds[] = new Rectangle2D[9];
 
@@ -189,6 +195,7 @@ public class BankedXpOverlay extends OverlayPanel {
         return bounds;
     }
 
+    // Sets the bounds and executes on detection
     private void setBounds(Graphics2D graphics, net.runelite.api.Point cursor, int x, int y){
         Rectangle2D bounds[] = createBounds(graphics, x, y);
 
