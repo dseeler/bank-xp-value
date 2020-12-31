@@ -1,4 +1,4 @@
-package com.bankedxp;
+package com.bankxpvalue;
 
 
 import java.util.List;
@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
 import java.awt.image.BufferedImage;
 import net.runelite.api.ItemComposition;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
 public class ItemDataCache {
 
     @AllArgsConstructor
-    private class ItemData{
+    class ItemData{
         public int id;
         public double xp;
         public String skill;
@@ -60,7 +61,7 @@ public class ItemDataCache {
         try{
             Gson gson = new Gson();
             JsonElement json = gson.fromJson(new FileReader("src/main/java/com/" +
-                    "bankedxp/item_xp_data.json"), JsonElement.class);
+                    "bankxpvalue/item_xp_data.json"), JsonElement.class);
             JsonObject root = json.getAsJsonObject();
             JsonArray items = root.getAsJsonArray("items");
 
@@ -107,5 +108,12 @@ public class ItemDataCache {
     private BufferedImage getImage(Item item){
         ItemComposition composition = itemManager.getItemComposition(item.getId());
         return itemManager.getImage(item.getId(), item.getQuantity(), true);
+    }
+
+    public ItemData getItem(int id){
+        if (cache.containsKey(id)){
+            return cache.get(id);
+        }
+        return null;
     }
 }

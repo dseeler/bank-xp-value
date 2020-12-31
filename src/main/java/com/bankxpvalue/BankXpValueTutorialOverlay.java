@@ -1,4 +1,4 @@
-package com.bankedxp;
+package com.bankxpvalue;
 
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
@@ -11,15 +11,16 @@ import net.runelite.client.ui.overlay.OverlayPosition;
 import javax.inject.Inject;
 import java.awt.*;
 
-public class BankedXpTutorialOverlay extends OverlayPanel {
+public class BankXpValueTutorialOverlay extends OverlayPanel {
 
     private final Client client;
-    private final BankedXpConfig config;
-    private final BankedXpPlugin plugin;
+    private final BankXpValueConfig config;
+    private final BankXpValuePlugin plugin;
     public static boolean nextTip = false;
+    private Widget bank;
 
     @Inject
-    private BankedXpTutorialOverlay(Client client, BankedXpConfig config, BankedXpPlugin plugin){
+    private BankXpValueTutorialOverlay(Client client, BankXpValueConfig config, BankXpValuePlugin plugin){
         this.client = client;
         this.config = config;
         this.plugin = plugin;
@@ -34,7 +35,7 @@ public class BankedXpTutorialOverlay extends OverlayPanel {
             return null;
         }
 
-        Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
 
         if (bank == null || bank.isHidden()){
             return null;

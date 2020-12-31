@@ -1,9 +1,8 @@
-package com.bankedxp;
+package com.bankxpvalue;
 
 import net.runelite.api.*;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.SkillColor;
@@ -17,25 +16,28 @@ import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-public class BankedXpOverlay extends OverlayPanel {
+public class BankXpValueOverlay extends OverlayPanel {
 
     private final Client client;
-    private final BankedXpPlugin plugin;
-    private final BankedXpConfig config;
+    private final BankXpValuePlugin plugin;
+    private final BankXpValueConfig config;
     private final ItemManager itemManager;
     private final TooltipManager tooltipManager;
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
-    private final BankedXpTutorialOverlay tutorialOverlay;
+    private final BankXpValueTutorialOverlay tutorialOverlay;
+    private Widget bank;
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
 
     @Inject
-    private BankedXpOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
-                            BankedXpConfig config, BankedXpPlugin plugin, BankedXpTutorialOverlay tutorialOverlay){
+    private BankXpValueOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
+                               BankXpValueConfig config, BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay){
 
         this.client = client;
         this.plugin = plugin;
@@ -59,7 +61,7 @@ public class BankedXpOverlay extends OverlayPanel {
 
     @Override
     public Dimension render(Graphics2D graphics){
-        Widget bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
 
         panelComponent.getChildren().clear();
 

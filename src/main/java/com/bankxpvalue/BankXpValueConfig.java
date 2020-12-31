@@ -1,11 +1,11 @@
-package com.bankedxp;
+package com.bankxpvalue;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("bankedxp")
-public interface BankedXpConfig extends Config{
+@ConfigGroup("bankxpvalue")
+public interface BankXpValueConfig extends Config{
     @ConfigItem(
             position = 1,
             keyName = "tutorial",
@@ -25,6 +25,16 @@ public interface BankedXpConfig extends Config{
 
     @ConfigItem(
             position = 2,
+            keyName = "itemXpTooltips",
+            name = "Show item xp tooltips",
+            description = "Hovering over items in your bank will display a tooltip containing the total xp of the stack"
+    )
+    default boolean showItemXpTooltips(){
+        return true;
+    }
+
+    @ConfigItem(
+            position = 3,
             keyName = "includeSeedVault",
             name = "Include seed vault",
             description = "Includes items in your seed vault"

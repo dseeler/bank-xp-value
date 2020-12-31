@@ -1,4 +1,4 @@
-package com.bankedxp;
+package com.bankxpvalue;
 
 import net.runelite.api.*;
 import net.runelite.api.widgets.Widget;
@@ -15,31 +15,35 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.eventbus.Subscribe;
 import com.google.inject.Provides;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @PluginDescriptor(
-        name = "Banked XP",
-        description = "Shows your banked XP",
-        tags = {"bank", "xp"},
+        name = "Bank XP Value",
+        description = "All-in-one banked xp viewer + item xp tooltips",
+        tags = {"bank", "xp", "calc", "item", "skill", "overlay", "tooltip"},
         loadWhenOutdated = true,
         enabledByDefault = true
 )
-public class BankedXpPlugin extends Plugin {
+public class BankXpValuePlugin extends Plugin {
 
     @Inject
     private Client client;
 
     @Inject
-    private BankedXpOverlay overlay;
+    private BankXpValueOverlay overlay;
 
     @Inject
-    private BankedXpTutorialOverlay tutorialOverlay;
+    private BankXpValueTutorialOverlay tutorialOverlay;
+
+    @Inject
+    private BankXpValueItemOverlay itemOverlay;
 
     @Inject
     private OverlayManager overlayManager;
 
     @Inject
-    private BankedXpConfig config;
+    private BankXpValueConfig config;
 
     @Inject
     private ItemDataCache data;
@@ -48,17 +52,21 @@ public class BankedXpPlugin extends Plugin {
     private ItemContainer bankContainer;
     private ItemContainer seedVaultContainer;
     private boolean pluginToggled = false;
+    private boolean tooltipsLoaded = false;
     private static final String CONFIG_GROUP = "bankedxp";
 
     @Provides
-    BankedXpConfig provideConfig(ConfigManager configManager){
-        return configManager.getConfig(BankedXpConfig.class);
+    BankXpValueConfig provideConfig(ConfigManager configManager){
+        return configManager.getConfig(BankXpValueConfig.class);
     }
 
     @Override
     protected void startUp() throws Exception{
         if (config.showTutorial()){
             overlayManager.add(tutorialOverlay);
+        }
+        if (config.showItemXpTooltips()){
+            overlayManager.add(itemOverlay);
         }
     }
 
