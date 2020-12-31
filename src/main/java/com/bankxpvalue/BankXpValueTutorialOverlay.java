@@ -1,5 +1,7 @@
 package com.bankxpvalue;
 
+import java.awt.*;
+import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -7,9 +9,6 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
-
-import javax.inject.Inject;
-import java.awt.*;
 
 public class BankXpValueTutorialOverlay extends OverlayPanel {
 

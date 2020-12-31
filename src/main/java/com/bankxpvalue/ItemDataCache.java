@@ -1,6 +1,5 @@
 package com.bankxpvalue;
 
-
 import java.util.List;
 import java.util.HashMap;
 import java.io.FileReader;
@@ -12,7 +11,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
 import java.awt.image.BufferedImage;
 import net.runelite.api.ItemComposition;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import lombok.AllArgsConstructor;

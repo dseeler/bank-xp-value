@@ -15,7 +15,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.eventbus.Subscribe;
 import com.google.inject.Provides;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @PluginDescriptor(
