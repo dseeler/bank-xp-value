@@ -1,7 +1,11 @@
-# RuneLite Banked XP plugin
-Calculates the total amount of XP available in your bank and displays the data in a single, condensed overlay. To promote simplicity and ease of use, subjective factors such as level or preference are not taken into account -- XP rates for items are fixed to the most popular/"meta" use for them.
+# RuneLite Bank XP Value plugin
+**All-in-one banked xp viewer + item xp tooltips**
 
-![bankedXP](/assets/bank-xp-value.gif)
+Calculates your banked xp across 9 skills and displays it in a single, condensed overlay. To ensure consistency, XP rates are fixed to the best/most popular use. Optional item xp tooltips are also included.
+
+![bank-xp-value](/assets/bank-xp-value.gif)
+
+![item-xp-tooltip](/assets/item-xp-tooltip.png)
 
 ## How to use it:
   1.  Download the plugin from the RuneLite [Plugin-Hub](https://github.com/runelite/runelite/wiki/Information-about-the-Plugin-Hub)
