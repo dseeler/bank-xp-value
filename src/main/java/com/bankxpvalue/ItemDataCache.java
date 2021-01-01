@@ -1,22 +1,14 @@
 package com.bankxpvalue;
 
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 import net.runelite.api.Item;
-
 import java.awt.image.BufferedImage;
-import net.runelite.api.ItemComposition;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import lombok.AllArgsConstructor;
@@ -35,6 +27,11 @@ public class ItemDataCache {
     class SkillContents{
         public double total;
         public List<ImageComponent> images;
+    }
+
+    @AllArgsConstructor
+    class ItemDataContainer{
+        List<ItemData> items;
     }
 
     private static HashMap<String, Integer> skills = new HashMap<>();
@@ -62,24 +59,12 @@ public class ItemDataCache {
 
     // Stores json data in hashmap
     private void populateCache(){
-        try{
-            final Gson gson = new Gson();
-            final InputStream itemData = ItemDataCache.class.getResourceAsStream("/item_xp_data.json");
+        final Gson gson = new Gson();
+        final InputStream itemData = ItemDataCache.class.getResourceAsStream("/item_xp_data.json");
 
-            JsonElement json = gson.fromJson(new InputStreamReader(itemData, StandardCharsets.UTF_8), JsonElement.class);
-            JsonObject root = json.getAsJsonObject();
-            JsonArray items = root.getAsJsonArray("items");
-
-            for (int i = 0; i < items.size(); i++){
-                JsonObject element = items.get(i).getAsJsonObject();
-                ItemData data = new ItemData(element.get("id").getAsInt(), element.get("xp").getAsDouble(),
-                        element.get("skill").getAsString());
-
-                cache.put(data.id, data);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        ItemDataContainer data = gson.fromJson(new InputStreamReader(itemData, StandardCharsets.UTF_8), ItemDataContainer.class);
+        for (int i = 0; i < data.items.size(); i++) {
+            cache.put(data.items.get(i).id, data.items.get(i));
         }
     }
 
@@ -111,7 +96,6 @@ public class ItemDataCache {
     }
 
     private BufferedImage getImage(Item item){
-        ItemComposition composition = itemManager.getItemComposition(item.getId());
         return itemManager.getImage(item.getId(), item.getQuantity(), true);
     }
 

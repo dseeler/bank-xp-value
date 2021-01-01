@@ -223,6 +223,6 @@ public class BankXpValuePlugin extends Plugin {
     // Hides tutorial overlay
     public void hideTutorial(){
         overlayManager.remove(tutorialOverlay);
-        config.setTutorial(false);
+        //config.setTutorial(false);
     }
 }
