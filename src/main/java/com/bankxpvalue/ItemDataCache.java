@@ -1,14 +1,20 @@
 package com.bankxpvalue;
 
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
-import java.io.FileReader;
 import java.util.ArrayList;
 import com.google.gson.Gson;
-import net.runelite.api.Item;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import net.runelite.api.Item;
+
 import java.awt.image.BufferedImage;
 import net.runelite.api.ItemComposition;
 import net.runelite.client.game.ItemManager;
@@ -26,13 +32,13 @@ public class ItemDataCache {
     }
 
     @AllArgsConstructor
-    public class SkillContents{
+    class SkillContents{
         public double total;
         public List<ImageComponent> images;
     }
 
-    private final static HashMap<String, Integer> skills = new HashMap<>();
-    private final static HashMap<Integer, ItemData> cache = new HashMap<>();
+    private static HashMap<String, Integer> skills = new HashMap<>();
+    private static HashMap<Integer, ItemData> cache = new HashMap<>();
     private final ItemManager itemManager;
 
     @Inject
@@ -57,9 +63,10 @@ public class ItemDataCache {
     // Stores json data in hashmap
     private void populateCache(){
         try{
-            Gson gson = new Gson();
-            JsonElement json = gson.fromJson(new FileReader("src/main/java/com/" +
-                    "bankxpvalue/item_xp_data.json"), JsonElement.class);
+            final Gson gson = new Gson();
+            final InputStream itemData = ItemDataCache.class.getResourceAsStream("/item_xp_data.json");
+
+            JsonElement json = gson.fromJson(new InputStreamReader(itemData, StandardCharsets.UTF_8), JsonElement.class);
             JsonObject root = json.getAsJsonObject();
             JsonArray items = root.getAsJsonArray("items");
 

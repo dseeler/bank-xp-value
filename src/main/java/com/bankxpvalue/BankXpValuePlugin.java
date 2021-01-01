@@ -73,6 +73,7 @@ public class BankXpValuePlugin extends Plugin {
     protected void shutDown() throws Exception{
         overlayManager.remove(overlay);
         overlayManager.remove(tutorialOverlay);
+        overlayManager.remove(itemOverlay);
     }
 
     @Subscribe
