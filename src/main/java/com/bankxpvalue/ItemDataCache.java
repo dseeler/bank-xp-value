@@ -45,6 +45,7 @@ public class ItemDataCache {
         this.itemManager = itemManager;
     }
 
+    // Set the skills
     private void mapSkills(){
         skills.put("construction", 0);
         skills.put("cooking", 1);
@@ -85,20 +86,14 @@ public class ItemDataCache {
                 skillContents[9].total += data.xp * items[i].getQuantity();
 
                 // Add the image to the skill's tooltip
-                final BufferedImage image = getImage(items[i]);
+                final BufferedImage image = itemManager.getImage(items[i].getId(), items[i].getQuantity(), true);
                 skillContents[skills.get(data.skill)].images.add(new ImageComponent(image));
-                if (skillContents[skills.get(data.skill)].equals("herblore")){
-                    System.out.println(items[i].getId());
-                }
             }
         }
         return skillContents;
     }
 
-    private BufferedImage getImage(Item item){
-        return itemManager.getImage(item.getId(), item.getQuantity(), true);
-    }
-
+    // Outside classes use to search hash table
     public ItemData getItem(int id){
         if (cache.containsKey(id)){
             return cache.get(id);
