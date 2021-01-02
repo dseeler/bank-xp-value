@@ -27,7 +27,7 @@ public interface BankXpValueConfig extends Config{
             position = 2,
             keyName = "itemXpTooltips",
             name = "Show item xp tooltips",
-            description = "Hovering over items in your bank will display a tooltip containing the total xp of the stack"
+            description = "Displays a tooltip containing the xp of an item"
     )
     default boolean showItemXpTooltips(){
         return true;

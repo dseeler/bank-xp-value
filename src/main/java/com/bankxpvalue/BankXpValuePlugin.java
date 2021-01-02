@@ -51,8 +51,7 @@ public class BankXpValuePlugin extends Plugin {
     private ItemContainer bankContainer;
     private ItemContainer seedVaultContainer;
     private boolean pluginToggled = false;
-    private boolean tooltipsLoaded = false;
-    private static final String CONFIG_GROUP = "bankedxp";
+    private static final String CONFIG_GROUP = "bank-xp-value";
 
     @Provides
     BankXpValueConfig provideConfig(ConfigManager configManager){
@@ -84,17 +83,6 @@ public class BankXpValuePlugin extends Plugin {
         }
 
         MenuEntry[] entries = client.getMenuEntries();
-        entries = Arrays.copyOf(entries, entries.length + 1);
-
-        MenuEntry bankedXp = new MenuEntry();
-        bankedXp.setOption("Toggle Banked XP");
-        bankedXp.setTarget("");
-        bankedXp.setType(MenuAction.WIDGET_FOURTH_OPTION.getId() + 2000);
-        bankedXp.setIdentifier(event.getIdentifier());
-        bankedXp.setParam0(event.getActionParam0());
-        bankedXp.setParam1(event.getActionParam1());
-
-        entries[entries.length - 1] = bankedXp;
 
         if (config.showTutorial()){
             entries = Arrays.copyOf(entries, entries.length + 1);
@@ -107,6 +95,16 @@ public class BankXpValuePlugin extends Plugin {
             tutorial.setParam1(event.getActionParam1());
             entries[entries.length - 1] = tutorial;
         }
+
+        entries = Arrays.copyOf(entries, entries.length + 1);
+        MenuEntry bankedXp = new MenuEntry();
+        bankedXp.setOption("Toggle Banked XP");
+        bankedXp.setTarget("");
+        bankedXp.setType(MenuAction.WIDGET_FOURTH_OPTION.getId() + 2000);
+        bankedXp.setIdentifier(event.getIdentifier());
+        bankedXp.setParam0(event.getActionParam0());
+        bankedXp.setParam1(event.getActionParam1());
+        entries[entries.length - 1] = bankedXp;
 
         client.setMenuEntries(entries);
     }
@@ -126,9 +124,7 @@ public class BankXpValuePlugin extends Plugin {
         }
 
         if (event.getMenuOption().equals("Disable tutorial")){
-            config.setTutorial(false);
-            tutorialOverlay.nextTip = false;
-            overlayManager.remove(tutorialOverlay);
+            hideTutorial();
             return;
         }
 
@@ -163,20 +159,24 @@ public class BankXpValuePlugin extends Plugin {
 
     @Subscribe
     public void onConfigChanged(ConfigChanged configChanged){
-        if (!configChanged.getGroup().equals("bankedxp")){
+        if (!configChanged.getGroup().equals("bankxpvalue")){
             return;
         }
 
         if (config.showTutorial()){
             hideOverlay();
+            config.setTutorial(true);
             overlayManager.add(tutorialOverlay);
         }
         else{
-            overlayManager.remove(tutorialOverlay);
+            hideTutorial();
         }
 
-        if (configChanged.getKey().equals("bankedxpplugin")){
+        if (configChanged.getKey().equals("bankxpvalueplugin")){
             pluginToggled = false;
+            hideTutorial();
+            hideOverlay();
+            overlayManager.remove(itemOverlay);
         }
         if (configChanged.getGroup().equals(CONFIG_GROUP) &&
                 configChanged.getKey().equals("includeSeedVault")){
@@ -223,6 +223,7 @@ public class BankXpValuePlugin extends Plugin {
     // Hides tutorial overlay
     public void hideTutorial(){
         overlayManager.remove(tutorialOverlay);
-        //config.setTutorial(false);
+        config.setTutorial(false);
+        tutorialOverlay.nextTip = false;
     }
 }

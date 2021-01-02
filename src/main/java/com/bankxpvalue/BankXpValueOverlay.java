@@ -46,10 +46,9 @@ public class BankXpValueOverlay extends OverlayPanel {
         setLayer(OverlayLayer.ABOVE_WIDGETS);
         setPriority(OverlayPriority.HIGHEST);
         setPosition(OverlayPosition.TOP_CENTER);
+        setResizable(false);
 
         panelComponent.setBackgroundColor(new Color(51, 51, 51, 245));
-
-        setPreferredLocation(new Point(50, 50));
 
         iconManager = new SkillIconManager();
         skillsBar = new PanelComponent();
