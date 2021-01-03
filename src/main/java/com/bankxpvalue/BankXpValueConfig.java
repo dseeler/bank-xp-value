@@ -35,6 +35,14 @@ public interface BankXpValueConfig extends Config{
 
     @ConfigItem(
             position = 3,
+            keyName = "keepFixed",
+            name = "Lock overlay in center",
+            description = "Keeps the overlay fixed in the center"
+    )
+    default boolean keepFixed(){ return false; }
+
+    @ConfigItem(
+            position = 4,
             keyName = "includeSeedVault",
             name = "Include seed vault",
             description = "Includes items in your seed vault"

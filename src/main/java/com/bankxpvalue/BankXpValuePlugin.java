@@ -139,6 +139,7 @@ public class BankXpValuePlugin extends Plugin {
             }
             else{
                 overlayManager.remove(overlay);
+                overlay.initialCenterPosition = true;
             }
             pluginToggled = !pluginToggled;
 
@@ -159,6 +160,12 @@ public class BankXpValuePlugin extends Plugin {
 
     @Subscribe
     public void onConfigChanged(ConfigChanged configChanged){
+        if (configChanged.getKey().equals("bankxpvalueplugin")){
+            hideTutorial();
+            hideOverlay();
+            overlayManager.remove(itemOverlay);
+        }
+
         if (!configChanged.getGroup().equals("bankxpvalue")){
             return;
         }
@@ -172,12 +179,6 @@ public class BankXpValuePlugin extends Plugin {
             hideTutorial();
         }
 
-        if (configChanged.getKey().equals("bankxpvalueplugin")){
-            pluginToggled = false;
-            hideTutorial();
-            hideOverlay();
-            overlayManager.remove(itemOverlay);
-        }
         if (configChanged.getGroup().equals(CONFIG_GROUP) &&
                 configChanged.getKey().equals("includeSeedVault")){
             calculate();
@@ -218,6 +219,7 @@ public class BankXpValuePlugin extends Plugin {
     public void hideOverlay(){
         pluginToggled = false;
         overlayManager.remove(overlay);
+        overlay.initialCenterPosition = true;
     }
 
     // Hides tutorial overlay

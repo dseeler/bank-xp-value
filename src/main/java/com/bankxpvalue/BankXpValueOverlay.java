@@ -1,21 +1,21 @@
 package com.bankxpvalue;
 
+import java.awt.*;
+import java.awt.Point;
 import net.runelite.api.*;
+import java.util.ArrayList;
+import javax.inject.Inject;
+import java.awt.geom.Rectangle2D;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.ui.overlay.*;
+import net.runelite.client.ui.SkillColor;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.SkillIconManager;
-import net.runelite.client.ui.SkillColor;
-import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.overlay.components.*;
-import net.runelite.client.ui.overlay.components.ComponentOrientation;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
-import javax.inject.Inject;
-import java.awt.*;
-import java.awt.Point;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
+import net.runelite.client.ui.overlay.components.ComponentOrientation;
 
 public class BankXpValueOverlay extends OverlayPanel {
 
@@ -31,6 +31,8 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
+    public static boolean initialCenterPosition = true;
+    private int iterationCounter = 0;
 
     @Inject
     private BankXpValueOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
@@ -47,6 +49,7 @@ public class BankXpValueOverlay extends OverlayPanel {
         setPriority(OverlayPriority.HIGHEST);
         setPosition(OverlayPosition.TOP_CENTER);
         setResizable(false);
+        setResettable(false);
 
         panelComponent.setBackgroundColor(new Color(51, 51, 51, 245));
 
@@ -68,7 +71,6 @@ public class BankXpValueOverlay extends OverlayPanel {
                 tutorialOverlay.nextTip = false;
                 plugin.hideTutorial();
             }
-
             return null;
         }
 
@@ -79,14 +81,24 @@ public class BankXpValueOverlay extends OverlayPanel {
         panelComponent.setPreferredSize(new Dimension(
                 graphics.getFontMetrics().stringWidth("Total Potential XP Available") + 50, 0));
 
-        int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
-        int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
-        setPreferredLocation(new Point(x, y));
+        if (initialCenterPosition || config.keepFixed()){
+            int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
+            int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
+            setPreferredLocation(new Point(x, y));
+            iterationCounter++;
+
+            // Takes 4 iterations for the positioning to properly set in the middle
+            if (iterationCounter == 4){
+                initialCenterPosition = false;
+                iterationCounter = 0;
+            }
+        }
 
         displayTotals();
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
         setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
+
 
         return super.render(graphics);
     }
