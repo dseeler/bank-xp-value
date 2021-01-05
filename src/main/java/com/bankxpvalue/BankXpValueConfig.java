@@ -39,7 +39,9 @@ public interface BankXpValueConfig extends Config{
             name = "Lock overlay in center",
             description = "Keeps the overlay fixed in the center"
     )
-    default boolean keepFixed(){ return false; }
+    default boolean keepFixed(){
+        return false;
+    }
 
     @ConfigItem(
             position = 4,

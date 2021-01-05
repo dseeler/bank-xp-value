@@ -97,8 +97,10 @@ public class BankXpValueOverlay extends OverlayPanel {
         displayTotals();
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
-        setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
 
+        if (null != getPreferredLocation()){
+            setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
+        }
 
         return super.render(graphics);
     }
