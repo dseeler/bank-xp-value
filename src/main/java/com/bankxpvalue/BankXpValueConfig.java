@@ -25,16 +25,6 @@ public interface BankXpValueConfig extends Config{
 
     @ConfigItem(
             position = 2,
-            keyName = "itemXpTooltips",
-            name = "Show item xp tooltips",
-            description = "Displays a tooltip containing the xp of an item"
-    )
-    default boolean showItemXpTooltips(){
-        return true;
-    }
-
-    @ConfigItem(
-            position = 3,
             keyName = "keepFixed",
             name = "Lock overlay in center",
             description = "Keeps the overlay fixed in the center"
@@ -44,12 +34,32 @@ public interface BankXpValueConfig extends Config{
     }
 
     @ConfigItem(
-            position = 4,
+            position = 3,
             keyName = "includeSeedVault",
             name = "Include seed vault",
             description = "Includes items in your seed vault"
     )
     default boolean includeSeedVault(){
+        return true;
+    }
+
+    @ConfigItem(
+            position = 4,
+            keyName = "itemXpTooltips",
+            name = "Show item xp tooltips",
+            description = "Displays a tooltip containing the xp of an item stack"
+    )
+    default boolean showItemXpTooltips(){
+        return true;
+    }
+
+    @ConfigItem(
+            position = 5,
+            keyName = "potentialLevels",
+            name = "Show potential level tooltips",
+            description = "Displays a tooltip containing your potential level for a skill"
+    )
+    default boolean potentialLevels(){
         return true;
     }
 }

@@ -2,6 +2,7 @@ package com.bankxpvalue;
 
 import java.awt.*;
 import java.awt.Point;
+import java.util.HashMap;
 import net.runelite.api.*;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -16,13 +17,13 @@ import net.runelite.client.ui.overlay.components.*;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.ui.overlay.components.ComponentOrientation;
+import net.runelite.client.util.ColorUtil;
 
 public class BankXpValueOverlay extends OverlayPanel {
 
     private final Client client;
     private final BankXpValuePlugin plugin;
     private final BankXpValueConfig config;
-    private final ItemManager itemManager;
     private final TooltipManager tooltipManager;
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
@@ -31,16 +32,16 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
+    private final static HashMap<String, Integer> potentialLevels = new HashMap<>();
     public static boolean initialCenterPosition = true;
     private int iterationCounter = 0;
 
     @Inject
-    private BankXpValueOverlay(Client client, ItemManager itemManager, TooltipManager tooltipManager,
-                               BankXpValueConfig config, BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay){
+    private BankXpValueOverlay(Client client, TooltipManager tooltipManager, BankXpValueConfig config,
+                               BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay){
 
         this.client = client;
         this.plugin = plugin;
-        this.itemManager = itemManager;
         this.config = config;
         this.tooltipManager = tooltipManager;
         this.tutorialOverlay = tutorialOverlay;
@@ -116,6 +117,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             }
         }
         createTooltips(skillContents);
+        setPotentialLevels(skillContents);
     }
 
     // Displays each total and corresponding skill
@@ -188,6 +190,19 @@ public class BankXpValueOverlay extends OverlayPanel {
         skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.SMITHING, true)));
     }
 
+    // Stores xp needed for a level up in hashmap
+    private void setPotentialLevels(ItemDataCache.SkillContents[] skillContents){
+        potentialLevels.put("construction", Experience.getLevelForXp(client.getSkillExperience(Skill.CONSTRUCTION) + (int)Math.ceil(skillContents[0].total)));
+        potentialLevels.put("cooking", Experience.getLevelForXp(client.getSkillExperience(Skill.COOKING) + (int)Math.ceil(skillContents[1].total)));
+        potentialLevels.put("crafting", Experience.getLevelForXp(client.getSkillExperience(Skill.CRAFTING) + (int)Math.ceil(skillContents[2].total)));
+        potentialLevels.put("farming", Experience.getLevelForXp(client.getSkillExperience(Skill.FARMING) + (int)Math.ceil(skillContents[3].total)));
+        potentialLevels.put("firemaking", Experience.getLevelForXp(client.getSkillExperience(Skill.FIREMAKING) + (int)Math.ceil(skillContents[4].total)));
+        potentialLevels.put("fletching", Experience.getLevelForXp(client.getSkillExperience(Skill.FLETCHING) + (int)Math.ceil(skillContents[5].total)));
+        potentialLevels.put("herblore", Experience.getLevelForXp(client.getSkillExperience(Skill.HERBLORE) + (int)Math.ceil(skillContents[6].total)));
+        potentialLevels.put("prayer", Experience.getLevelForXp(client.getSkillExperience(Skill.PRAYER) + (int)Math.ceil(skillContents[7].total)));
+        potentialLevels.put("smithing", Experience.getLevelForXp(client.getSkillExperience(Skill.SMITHING) + (int)Math.ceil(skillContents[8].total)));
+    }
+
     // Creates the tooltips that appear when hovering over skill bar
     private void createTooltips(ItemDataCache.SkillContents[] skillContents){
         if (itemPanels.size() != 0){
@@ -222,9 +237,14 @@ public class BankXpValueOverlay extends OverlayPanel {
         Rectangle2D bounds[] = createBounds(graphics, x, y);
 
         if (bounds[0].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
             if (itemPanels.get(0).getChildren().size() != 0){
-                tooltipManager.clear();
-                tooltipManager.add(new Tooltip("Construction: " + xpTotals[0] + "xp"));
+                String tooltip = xpTotals[0] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("construction");
+                tooltip = ColorUtil.wrapWithColorTag("Construction: ",
+                        SkillColor.CONSTRUCTION.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(0)));
             }
             else{
@@ -234,7 +254,12 @@ public class BankXpValueOverlay extends OverlayPanel {
         else if (bounds[1].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(1).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Cooking: " + xpTotals[1] + "xp"));
+                String tooltip = xpTotals[1] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("cooking");
+                tooltip = ColorUtil.wrapWithColorTag("Cooking: ",
+                        SkillColor.COOKING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(1)));
             }
             else{
@@ -244,7 +269,12 @@ public class BankXpValueOverlay extends OverlayPanel {
         else if (bounds[2].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(2).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Crafting: " + xpTotals[2] + "xp"));
+                String tooltip = xpTotals[2] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("crafting");
+                tooltip = ColorUtil.wrapWithColorTag("Crafting: ",
+                        SkillColor.CRAFTING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(2)));
             }
             else{
@@ -254,7 +284,12 @@ public class BankXpValueOverlay extends OverlayPanel {
         else if (bounds[3].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(3).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Farming: " + xpTotals[3] + "xp"));
+                String tooltip = xpTotals[3] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("farming");
+                tooltip = ColorUtil.wrapWithColorTag("Farming: ",
+                        SkillColor.FARMING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(3)));
             }
             else{
@@ -264,17 +299,27 @@ public class BankXpValueOverlay extends OverlayPanel {
         else if (bounds[4].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(4).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Firemaking: " + xpTotals[4] + "xp"));
+                String tooltip = xpTotals[4] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("firemaking");
+                tooltip = ColorUtil.wrapWithColorTag("Firemaking: ",
+                        new Color(255, 119, 0)) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(4)));
             }
-            else{
+            else {
                 tooltipManager.add(new Tooltip("Firemaking: " + xpTotals[4]));
             }
         }
         else if (bounds[5].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(5).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Fletching: " + xpTotals[5] + "xp"));
+                String tooltip = xpTotals[5] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("fletching");
+                tooltip = ColorUtil.wrapWithColorTag("Fletching: ",
+                        SkillColor.FLETCHING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(5)));
             }
             else{
@@ -284,30 +329,45 @@ public class BankXpValueOverlay extends OverlayPanel {
         else if (bounds[6].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(6).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Herblore: " + xpTotals[6] + "xp"));
+                String tooltip = xpTotals[6] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("herblore");
+                tooltip = ColorUtil.wrapWithColorTag("Herblore: ",
+                        SkillColor.HERBLORE.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(6)));
             }
-            else{
+            else {
                 tooltipManager.add(new Tooltip("Herblore: " + xpTotals[6]));
             }
         }
         else if (bounds[7].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(7).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Prayer: " + xpTotals[7] + "xp"));
+                String tooltip = xpTotals[7] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("prayer");
+                tooltip = ColorUtil.wrapWithColorTag("Prayer: ",
+                        SkillColor.PRAYER.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(7)));
             }
-            else{
+            else {
                 tooltipManager.add(new Tooltip("Prayer: " + xpTotals[7]));
             }
         }
         else if (bounds[8].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
             if (itemPanels.get(8).getChildren().size() != 0){
-                tooltipManager.add(new Tooltip("Smithing: " + xpTotals[8] + "xp"));
+                String tooltip = xpTotals[8] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Potential level: " + potentialLevels.get("smithing");
+                tooltip = ColorUtil.wrapWithColorTag("Smithing: ",
+                        SkillColor.SMITHING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
                 tooltipManager.add(new Tooltip(itemPanels.get(8)));
             }
-            else{
+            else {
                 tooltipManager.add(new Tooltip("Smithing: " + xpTotals[8]));
             }
         }
