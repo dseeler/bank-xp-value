@@ -10,14 +10,13 @@ import java.awt.geom.Rectangle2D;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.SkillColor;
+import net.runelite.client.util.ColorUtil;
 import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.overlay.components.*;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.ui.overlay.components.ComponentOrientation;
-import net.runelite.client.util.ColorUtil;
 
 public class BankXpValueOverlay extends OverlayPanel {
 
@@ -99,7 +98,12 @@ public class BankXpValueOverlay extends OverlayPanel {
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
 
         if (null != getPreferredLocation()){
-            setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
+            if (getBounds().getHeight() >= 200){
+                setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
+            }
+            else{
+                setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 139);
+            }
         }
 
         return super.render(graphics);
