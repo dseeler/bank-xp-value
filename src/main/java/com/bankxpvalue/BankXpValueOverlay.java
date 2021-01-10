@@ -75,10 +75,10 @@ public class BankXpValueOverlay extends OverlayPanel {
         }
 
         panelComponent.getChildren().add(TitleComponent.builder()
-                .text("Potential XP Available")
+                .text("Banked Experience")
                 .build());
 
-        panelComponent.setPreferredSize(new Dimension(skillsBar.getBounds().width + 5, 0));
+        panelComponent.setPreferredSize(new Dimension(skillsBar.getBounds().width + 6, 0));
 
         if (initialCenterPosition || config.keepFixed()){
             int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
