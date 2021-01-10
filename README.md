@@ -11,7 +11,7 @@ As of version 1.1, skill-bar tooltips also include your potential level for a sk
 ## Item xp tooltips
 ![item-xp-tooltip](/assets/item-xp-tooltip.png)
 
-## Potential levels
+## Potential level
 ![potential-level](/assets/potential-level.png)
 
 ## How to use it:

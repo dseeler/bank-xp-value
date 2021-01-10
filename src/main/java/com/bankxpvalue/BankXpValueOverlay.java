@@ -79,8 +79,7 @@ public class BankXpValueOverlay extends OverlayPanel {
                 .text("Potential XP Available")
                 .build());
 
-        panelComponent.setPreferredSize(new Dimension(
-                graphics.getFontMetrics().stringWidth("Total Potential XP Available") + 50, 0));
+        panelComponent.setPreferredSize(new Dimension(skillsBar.getBounds().width + 5, 0));
 
         if (initialCenterPosition || config.keepFixed()){
             int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
