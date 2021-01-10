@@ -55,9 +55,9 @@ public interface BankXpValueConfig extends Config{
 
     @ConfigItem(
             position = 5,
-            keyName = "potentialLevels",
-            name = "Show potential level tooltips",
-            description = "Displays a tooltip containing your potential level for a skill"
+            keyName = "levelUps",
+            name = "Show available level-ups",
+            description = "Skill-bar tooltips include number of available level-ups"
     )
     default boolean potentialLevels(){
         return true;

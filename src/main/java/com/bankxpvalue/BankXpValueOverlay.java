@@ -31,7 +31,7 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
-    private final static HashMap<String, Integer> potentialLevels = new HashMap<>();
+    private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
     public static boolean initialCenterPosition = true;
     private int iterationCounter = 0;
 
@@ -195,15 +195,31 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     // Stores xp needed for a level up in hashmap
     private void setPotentialLevels(ItemDataCache.SkillContents[] skillContents){
-        potentialLevels.put("construction", Experience.getLevelForXp(client.getSkillExperience(Skill.CONSTRUCTION) + (int)Math.ceil(skillContents[0].total)));
-        potentialLevels.put("cooking", Experience.getLevelForXp(client.getSkillExperience(Skill.COOKING) + (int)Math.ceil(skillContents[1].total)));
-        potentialLevels.put("crafting", Experience.getLevelForXp(client.getSkillExperience(Skill.CRAFTING) + (int)Math.ceil(skillContents[2].total)));
-        potentialLevels.put("farming", Experience.getLevelForXp(client.getSkillExperience(Skill.FARMING) + (int)Math.ceil(skillContents[3].total)));
-        potentialLevels.put("firemaking", Experience.getLevelForXp(client.getSkillExperience(Skill.FIREMAKING) + (int)Math.ceil(skillContents[4].total)));
-        potentialLevels.put("fletching", Experience.getLevelForXp(client.getSkillExperience(Skill.FLETCHING) + (int)Math.ceil(skillContents[5].total)));
-        potentialLevels.put("herblore", Experience.getLevelForXp(client.getSkillExperience(Skill.HERBLORE) + (int)Math.ceil(skillContents[6].total)));
-        potentialLevels.put("prayer", Experience.getLevelForXp(client.getSkillExperience(Skill.PRAYER) + (int)Math.ceil(skillContents[7].total)));
-        potentialLevels.put("smithing", Experience.getLevelForXp(client.getSkillExperience(Skill.SMITHING) + (int)Math.ceil(skillContents[8].total)));
+        potentialLvlUps.put("construction", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.CONSTRUCTION)
+                + (int)Math.ceil(skillContents[0].total)) - client.getRealSkillLevel(Skill.CONSTRUCTION)));
+        potentialLvlUps.put("cooking", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.COOKING)
+                + (int)Math.ceil(skillContents[1].total)) - client.getRealSkillLevel(Skill.COOKING)));
+        potentialLvlUps.put("crafting", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.CRAFTING)
+                + (int)Math.ceil(skillContents[2].total)) - client.getRealSkillLevel(Skill.CRAFTING)));
+        potentialLvlUps.put("farming", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.FARMING)
+                + (int)Math.ceil(skillContents[3].total)) - client.getRealSkillLevel(Skill.FARMING)));
+        potentialLvlUps.put("firemaking", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.FIREMAKING)
+                + (int)Math.ceil(skillContents[4].total)) - client.getRealSkillLevel(Skill.FIREMAKING)));
+        potentialLvlUps.put("fletching", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.FLETCHING)
+                + (int)Math.ceil(skillContents[5].total)) - client.getRealSkillLevel(Skill.FLETCHING)));
+        potentialLvlUps.put("herblore", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.HERBLORE)
+                + (int)Math.ceil(skillContents[6].total)) - client.getRealSkillLevel(Skill.HERBLORE)));
+        potentialLvlUps.put("prayer", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.PRAYER)
+                + (int)Math.ceil(skillContents[7].total)) - client.getRealSkillLevel(Skill.PRAYER)));
+        potentialLvlUps.put("smithing", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.SMITHING)
+                + (int)Math.ceil(skillContents[8].total)) - client.getRealSkillLevel(Skill.SMITHING)));
+    }
+
+    private String colorLvlUps(int num){
+        if (num > 0){
+            return ColorUtil.wrapWithColorTag("+" + num, Color.GREEN);
+        }
+        return "" + num;
     }
 
     // Creates the tooltips that appear when hovering over skill bar
@@ -244,7 +260,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(0).getChildren().size() != 0){
                 String tooltip = xpTotals[0] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("construction");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("construction");
                 tooltip = ColorUtil.wrapWithColorTag("Construction: ",
                         SkillColor.CONSTRUCTION.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -259,7 +275,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(1).getChildren().size() != 0){
                 String tooltip = xpTotals[1] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("cooking");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("cooking");
                 tooltip = ColorUtil.wrapWithColorTag("Cooking: ",
                         SkillColor.COOKING.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -274,7 +290,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(2).getChildren().size() != 0){
                 String tooltip = xpTotals[2] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("crafting");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("crafting");
                 tooltip = ColorUtil.wrapWithColorTag("Crafting: ",
                         SkillColor.CRAFTING.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -289,7 +305,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(3).getChildren().size() != 0){
                 String tooltip = xpTotals[3] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("farming");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("farming");
                 tooltip = ColorUtil.wrapWithColorTag("Farming: ",
                         SkillColor.FARMING.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -304,7 +320,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(4).getChildren().size() != 0){
                 String tooltip = xpTotals[4] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("firemaking");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("firemaking");
                 tooltip = ColorUtil.wrapWithColorTag("Firemaking: ",
                         new Color(255, 119, 0)) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -319,7 +335,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(5).getChildren().size() != 0){
                 String tooltip = xpTotals[5] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("fletching");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("fletching");
                 tooltip = ColorUtil.wrapWithColorTag("Fletching: ",
                         SkillColor.FLETCHING.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -334,7 +350,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(6).getChildren().size() != 0){
                 String tooltip = xpTotals[6] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("herblore");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("herblore");
                 tooltip = ColorUtil.wrapWithColorTag("Herblore: ",
                         SkillColor.HERBLORE.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -349,7 +365,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(7).getChildren().size() != 0){
                 String tooltip = xpTotals[7] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("prayer");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("prayer");
                 tooltip = ColorUtil.wrapWithColorTag("Prayer: ",
                         SkillColor.PRAYER.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));
@@ -364,7 +380,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             if (itemPanels.get(8).getChildren().size() != 0){
                 String tooltip = xpTotals[8] + "xp";
                 if (config.potentialLevels())
-                    tooltip += "  |  Potential level: " + potentialLevels.get("smithing");
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("smithing");
                 tooltip = ColorUtil.wrapWithColorTag("Smithing: ",
                         SkillColor.SMITHING.getColor().brighter().brighter()) + tooltip;
                 tooltipManager.add(new Tooltip(tooltip));

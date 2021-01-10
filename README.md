@@ -3,7 +3,7 @@
 
 Calculates your banked xp across 9 skills and dynamically displays results in a single, condensed overlay. To ensure consistency, xp rates are fixed to the best/most popular use. Optional item xp tooltips are also included. 
 
-As of version 1.1, skill-bar tooltips also include your potential level for a skill (current xp + banked xp). This feature is configurable under "Show potential levels". 
+As of version 1.1, skill-bar tooltips also include the number of available level-ups. This feature is configurable under "Show level-ups". 
 
 ## Banked xp viewer
 ![bank-xp-value](/assets/bank-xp-value.gif)
@@ -11,8 +11,8 @@ As of version 1.1, skill-bar tooltips also include your potential level for a sk
 ## Item xp tooltips
 ![item-xp-tooltip](/assets/item-xp-tooltip.png)
 
-## Potential level
-![potential-level](/assets/potential-level.png)
+## Level-Ups
+![level-ups](/assets/level-ups.png)
 
 ## How to use it:
   1.  Download the plugin from the RuneLite [Plugin-Hub](https://github.com/runelite/runelite/wiki/Information-about-the-Plugin-Hub)
