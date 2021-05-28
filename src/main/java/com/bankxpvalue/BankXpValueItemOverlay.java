@@ -58,7 +58,16 @@ public class BankXpValueItemOverlay extends Overlay {
         }
 
         final int index = menuEntry.getParam0();
-        final Item item = bank.getItem(index);
+        final Item item;
+
+
+        if (null == bank.getItem(index)){
+            return null;
+        }
+        else{
+            item = bank.getItem(index);
+        }
+
         final StringBuilder xpValue = new StringBuilder();
 
         try{
