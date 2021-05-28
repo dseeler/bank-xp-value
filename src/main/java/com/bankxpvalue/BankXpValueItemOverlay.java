@@ -58,7 +58,7 @@ public class BankXpValueItemOverlay extends Overlay {
         }
 
         final int index = menuEntry.getParam0();
-        final Item item;
+        Item item;
 
 
         if (null == bank.getItem(index)){
