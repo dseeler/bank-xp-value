@@ -15,7 +15,7 @@ public class BankXpValueTutorialOverlay extends OverlayPanel {
     private final Client client;
     private final BankXpValueConfig config;
     private final BankXpValuePlugin plugin;
-    public static boolean nextTip = false;
+    public boolean nextTip = false;
     private Widget bank;
 
     @Inject

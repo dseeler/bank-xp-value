@@ -3,7 +3,6 @@ package com.bankxpvalue;
 import java.awt.*;
 
 import net.runelite.api.*;
-import net.runelite.api.widgets.WidgetID;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.ui.SkillColor;
 import net.runelite.client.ui.overlay.Overlay;
@@ -51,9 +50,8 @@ public class BankXpValueItemOverlay extends Overlay {
         final ItemContainer bank = client.getItemContainer(InventoryID.BANK);
         final MenuEntry menuEntry = menuEntries[menuEntries.length - 1];
         final int widgetId = menuEntry.getParam1();
-        final int groupId = WidgetInfo.TO_GROUP(widgetId);
 
-        if (groupId != WidgetID.BANK_GROUP_ID || widgetId != 786444){
+        if (widgetId != WidgetInfo.BANK_ITEM_CONTAINER.getId()){
             return null;
         }
 

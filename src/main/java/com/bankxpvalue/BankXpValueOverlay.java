@@ -32,7 +32,7 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
     private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
-    public static boolean initialCenterPosition = true;
+    public boolean initialCenterPosition = true;
     private int iterationCounter = 0;
 
     @Inject
@@ -242,7 +242,7 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     // Creates the hover bounds for each skill bar icon
     private Rectangle2D[] createBounds(Graphics2D graphics, int x, int y){
-        Rectangle2D bounds[] = new Rectangle2D[9];
+        Rectangle2D[] bounds = new Rectangle2D[9];
 
         for (int i = 0; i < bounds.length; i++){
             bounds[i] = new Rectangle2D.Double(x, y, 22, 25);
@@ -253,7 +253,7 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     // Sets the bounds and executes on detection
     private void setBounds(Graphics2D graphics, net.runelite.api.Point cursor, int x, int y){
-        Rectangle2D bounds[] = createBounds(graphics, x, y);
+        Rectangle2D[] bounds = createBounds(graphics, x, y);
 
         if (bounds[0].contains(cursor.getX(), cursor.getY())){
             tooltipManager.clear();
