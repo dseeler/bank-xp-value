@@ -118,7 +118,6 @@ public class BankXpValuePlugin extends Plugin {
         }
         else{
             overlayManager.remove(overlay);
-            overlay.initialCenterPosition = config.createInCenter();
         }
     }
 
@@ -194,7 +193,6 @@ public class BankXpValuePlugin extends Plugin {
     public void hideOverlay(){
         pluginToggled = false;
         overlayManager.remove(overlay);
-        overlay.initialCenterPosition = config.createInCenter();
     }
 
     // Hides tutorial overlay

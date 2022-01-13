@@ -24,17 +24,7 @@ public interface BankXpValueConfig extends Config{
     void setTutorial(boolean tutorial);
 
     @ConfigItem(
-        position = 2,
-        keyName = "createInCenter",
-        name = "Create overlay in center",
-        description = "Creates the overlay in the center of the bank window"
-    )
-    default boolean createInCenter(){
-        return true;
-    }
-
-    @ConfigItem(
-            position = 3,
+            position = 2,
             keyName = "keepFixed",
             name = "Lock overlay in center",
             description = "Keeps the overlay fixed in the center of the bank window"
@@ -44,7 +34,7 @@ public interface BankXpValueConfig extends Config{
     }
 
     @ConfigItem(
-            position = 4,
+            position = 3,
             keyName = "includeSeedVault",
             name = "Include seed vault",
             description = "Includes items in your seed vault"
@@ -54,7 +44,7 @@ public interface BankXpValueConfig extends Config{
     }
 
     @ConfigItem(
-            position = 5,
+            position = 4,
             keyName = "itemXpTooltips",
             name = "Show item xp tooltips",
             description = "Displays a tooltip containing the xp of an item stack"
@@ -64,7 +54,7 @@ public interface BankXpValueConfig extends Config{
     }
 
     @ConfigItem(
-            position = 6,
+            position = 5,
             keyName = "levelUps",
             name = "Show available level-ups",
             description = "Skill-bar tooltips include number of available level-ups"

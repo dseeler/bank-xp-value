@@ -27,23 +27,24 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
     private final BankXpValueTutorialOverlay tutorialOverlay;
+    private final OverlayManager overlayManager;
     private Widget bank;
 
     private final static String[] xpTotals = new String[10];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
     private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
-    public boolean initialCenterPosition = true;
     private int iterationCounter = 0;
 
     @Inject
     private BankXpValueOverlay(Client client, TooltipManager tooltipManager, BankXpValueConfig config,
-                               BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay){
+                               BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay, OverlayManager overlayManager){
 
         this.client = client;
         this.plugin = plugin;
         this.config = config;
         this.tooltipManager = tooltipManager;
         this.tutorialOverlay = tutorialOverlay;
+        this.overlayManager = overlayManager;
 
         setLayer(OverlayLayer.ABOVE_WIDGETS);
         setPriority(OverlayPriority.HIGHEST);
@@ -80,7 +81,7 @@ public class BankXpValueOverlay extends OverlayPanel {
 
         panelComponent.setPreferredSize(new Dimension(skillsBar.getBounds().width + 6, 0));
 
-        if (initialCenterPosition || config.keepFixed()){
+        if (config.keepFixed()){
             int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
             int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
             setPreferredLocation(new Point(x, y));
@@ -88,7 +89,8 @@ public class BankXpValueOverlay extends OverlayPanel {
 
             // Takes 4 iterations for the positioning to properly set in the middle
             if (iterationCounter == 4){
-                initialCenterPosition = false;
+                // Saves the preferred location to the config so that there is no flickering when enabling again
+                this.overlayManager.saveOverlay(this);
                 iterationCounter = 0;
             }
         }
