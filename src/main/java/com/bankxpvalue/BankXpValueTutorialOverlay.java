@@ -2,6 +2,8 @@ package com.bankxpvalue;
 
 import java.awt.*;
 import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -10,19 +12,21 @@ import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 
+@Singleton
 public class BankXpValueTutorialOverlay extends OverlayPanel {
-
     private final Client client;
     private final BankXpValueConfig config;
     private final BankXpValuePlugin plugin;
+    private final BankXpValueOverlay overlay;
     public boolean nextTip = false;
     private Widget bank;
 
     @Inject
-    private BankXpValueTutorialOverlay(Client client, BankXpValueConfig config, BankXpValuePlugin plugin){
+    private BankXpValueTutorialOverlay(Client client, BankXpValueConfig config, BankXpValuePlugin plugin, BankXpValueOverlay overlay){
         this.client = client;
         this.config = config;
         this.plugin = plugin;
+        this.overlay = overlay;
 
         setPosition(OverlayPosition.DYNAMIC);
         setLayer(OverlayLayer.ALWAYS_ON_TOP);
@@ -65,8 +69,8 @@ public class BankXpValueTutorialOverlay extends OverlayPanel {
         }
         // If on tutorial step 2/2
         else{
-            int x = bounds.x - 308;
-            int y = bank.getHeight() / 2 + 81;
+            int x = overlay.getPreferredLocation().x + 3;
+            int y = overlay.getPreferredLocation().y + 181;
 
             graphics.setColor(ColorScheme.BRAND_ORANGE);
             graphics.setStroke(new BasicStroke(2));

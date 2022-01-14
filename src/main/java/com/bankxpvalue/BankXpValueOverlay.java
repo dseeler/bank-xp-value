@@ -6,6 +6,7 @@ import java.util.HashMap;
 import net.runelite.api.*;
 import java.util.ArrayList;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.awt.geom.Rectangle2D;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.ui.overlay.*;
@@ -18,6 +19,7 @@ import net.runelite.client.ui.overlay.tooltip.Tooltip;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
 import net.runelite.client.ui.overlay.components.ComponentOrientation;
 
+@Singleton
 public class BankXpValueOverlay extends OverlayPanel {
 
     private final Client client;
@@ -26,7 +28,6 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final TooltipManager tooltipManager;
     private final SkillIconManager iconManager;
     private final PanelComponent skillsBar;
-    private final BankXpValueTutorialOverlay tutorialOverlay;
     private final OverlayManager overlayManager;
     private Widget bank;
 
@@ -37,13 +38,12 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     @Inject
     private BankXpValueOverlay(Client client, TooltipManager tooltipManager, BankXpValueConfig config,
-                               BankXpValuePlugin plugin, BankXpValueTutorialOverlay tutorialOverlay, OverlayManager overlayManager){
+                               BankXpValuePlugin plugin, OverlayManager overlayManager){
 
         this.client = client;
         this.plugin = plugin;
         this.config = config;
         this.tooltipManager = tooltipManager;
-        this.tutorialOverlay = tutorialOverlay;
         this.overlayManager = overlayManager;
 
         setLayer(OverlayLayer.ABOVE_WIDGETS);
@@ -61,6 +61,14 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     @Override
     public Dimension render(Graphics2D graphics){
+        // Used when the overlay is set to TOP_CENTER, we'll move it to CENTER_CENTER so that
+        // the tutorial actually has a location to use.
+        if (getPreferredLocation() == null) {
+            // Set the location to something so that this block isn't run on next iteration
+            setPreferredLocation(getBounds().getLocation());
+            resetPositionToCenter();
+        }
+
         bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
 
         panelComponent.getChildren().clear();
@@ -69,7 +77,6 @@ public class BankXpValueOverlay extends OverlayPanel {
             plugin.hideOverlay();
 
             if (config.showTutorial()){
-                tutorialOverlay.nextTip = false;
                 plugin.hideTutorial();
             }
             return null;
@@ -81,21 +88,21 @@ public class BankXpValueOverlay extends OverlayPanel {
 
         panelComponent.setPreferredSize(new Dimension(skillsBar.getBounds().width + 6, 0));
 
-        if (config.keepFixed()){
-            int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
-            int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
-            setPreferredLocation(new Point(x, y));
+        displayTotals();
+
+        if (iterationCounter >= 0){
             iterationCounter++;
 
-            // Takes 4 iterations for the positioning to properly set in the middle
-            if (iterationCounter == 4){
+            // Takes 2 iterations for the positioning to properly set in the middle
+            if (iterationCounter == 2){
+                int x = (int)(bank.getBounds().x + (bank.getBounds().getWidth() / 2) - (getBounds().getWidth() / 2));
+                int y = (int)(bank.getBounds().y + (bank.getBounds().getHeight()/ 2) - (getBounds().getHeight() / 2));
+                setPreferredLocation(new Point(x, y));
                 // Saves the preferred location to the config so that there is no flickering when enabling again
                 this.overlayManager.saveOverlay(this);
-                iterationCounter = 0;
+                iterationCounter = -1;
             }
         }
-
-        displayTotals();
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
 
@@ -123,6 +130,10 @@ public class BankXpValueOverlay extends OverlayPanel {
         }
         createTooltips(skillContents);
         setPotentialLevels(skillContents);
+    }
+
+    public void resetPositionToCenter() {
+        iterationCounter = 0;
     }
 
     // Displays each total and corresponding skill

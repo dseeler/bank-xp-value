@@ -22,6 +22,7 @@ import java.util.Arrays;
     tags = {"bank", "xp", "calc", "item", "skill", "overlay", "tooltip"}
 )
 public class BankXpValuePlugin extends Plugin {
+    public static final String CONFIG_GROUP = "bankxpvalue";
 
     @Inject
     private Client client;
@@ -48,7 +49,6 @@ public class BankXpValuePlugin extends Plugin {
     private ItemContainer bankContainer;
     private ItemContainer seedVaultContainer;
     private boolean pluginToggled = false;
-    private static final String CONFIG_GROUP = "bankxpvalue";
 
     @Provides
     BankXpValueConfig provideConfig(ConfigManager configManager){
@@ -115,9 +115,13 @@ public class BankXpValuePlugin extends Plugin {
         if (pluginToggled){
             calculate();
             overlayManager.add(overlay);
+            if (config.resetToCenter()) {
+                overlay.resetPositionToCenter();
+            }
         }
         else{
             overlayManager.remove(overlay);
+            hideTutorial();
         }
     }
 
