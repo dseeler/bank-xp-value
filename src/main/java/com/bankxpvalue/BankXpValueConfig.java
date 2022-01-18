@@ -25,7 +25,7 @@ public interface BankXpValueConfig extends Config{
 
     @ConfigItem(
             position = 2,
-            keyName = "keepFixed",
+            keyName = "resetToCenter",
             name = "Reset overlay to center",
             description = "Resets the overlay to the center of the bank window when shown"
     )

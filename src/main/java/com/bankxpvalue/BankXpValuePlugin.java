@@ -147,6 +147,11 @@ public class BankXpValuePlugin extends Plugin {
             return;
         }
 
+        // If the overlay is being shown while the user toggles resetToCenter on, move the overlay
+        if (pluginToggled && configChanged.getKey().equals("resetToCenter") && config.resetToCenter()) {
+            overlay.resetPositionToCenter();
+        }
+
         if (config.showTutorial()){
             hideOverlay();
             config.setTutorial(true);
