@@ -152,13 +152,15 @@ public class BankXpValuePlugin extends Plugin {
             overlay.resetPositionToCenter();
         }
 
-        if (config.showTutorial()){
-            hideOverlay();
-            config.setTutorial(true);
-            overlayManager.add(tutorialOverlay);
-        }
-        else{
-            hideTutorial();
+        if (configChanged.getKey().equals("tutorial")){
+            if (config.showTutorial()){
+                hideOverlay();
+                config.setTutorial(true);
+                overlayManager.add(tutorialOverlay);
+            }
+            else{
+                hideTutorial();
+            }
         }
 
         if (configChanged.getKey().equals("includeSeedVault")){
