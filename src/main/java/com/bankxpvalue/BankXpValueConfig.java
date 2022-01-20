@@ -4,7 +4,7 @@ import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("bankxpvalue")
+@ConfigGroup(BankXpValuePlugin.CONFIG_GROUP)
 public interface BankXpValueConfig extends Config{
     @ConfigItem(
             position = 1,
@@ -25,11 +25,11 @@ public interface BankXpValueConfig extends Config{
 
     @ConfigItem(
             position = 2,
-            keyName = "keepFixed",
-            name = "Lock overlay in center",
-            description = "Keeps the overlay fixed in the center"
+            keyName = "resetToCenter",
+            name = "Reset overlay to center",
+            description = "Resets the overlay to the center of the bank window when shown"
     )
-    default boolean keepFixed(){
+    default boolean resetToCenter(){
         return false;
     }
 
