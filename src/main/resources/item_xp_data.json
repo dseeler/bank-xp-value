@@ -1391,6 +1391,11 @@
       "skill": "herblore"
     },
     {
+      "id": 3002,
+      "xp": 180,
+      "skill": "herblore"
+    },
+    {
       "id": 3004,
       "xp": 142.5,
       "skill": "herblore"
