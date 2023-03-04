@@ -10,7 +10,7 @@ repositories {
 	mavenCentral()
 }
 
-def runeLiteVersion = '1.8.21'
+def runeLiteVersion = '1.9.11.2'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -23,7 +23,7 @@ dependencies {
 }
 
 group = 'com.bankxpvalue'
-version = '1.2.1'
+version = '1.2.2'
 sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
