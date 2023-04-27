@@ -37,12 +37,14 @@ public class ItemDataCache {
     private static HashMap<String, Integer> skills = new HashMap<>();
     private static HashMap<Integer, ItemData> cache = new HashMap<>();
     private final ItemManager itemManager;
+    private final Gson gson;
 
     @Inject
-    public ItemDataCache(ItemManager itemManager){
+    public ItemDataCache(ItemManager itemManager, Gson gson){
         mapSkills();
         populateCache();
         this.itemManager = itemManager;
+        this.gson = gson;
     }
 
     // Set the skills
@@ -60,7 +62,6 @@ public class ItemDataCache {
 
     // Stores json data in hashmap
     private void populateCache(){
-        final Gson gson = new Gson();
         final InputStream itemData = ItemDataCache.class.getResourceAsStream("/item_xp_data.json");
 
         ItemDataContainer data = gson.fromJson(new InputStreamReader(itemData, StandardCharsets.UTF_8), ItemDataContainer.class);
