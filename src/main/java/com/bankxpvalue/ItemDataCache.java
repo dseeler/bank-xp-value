@@ -44,10 +44,10 @@ public class ItemDataCache {
 
     @Inject
     public ItemDataCache(ItemManager itemManager, Gson gson){
-        mapSkills();
-        populateCache();
         this.itemManager = itemManager;
         this.gson = gson;
+        mapSkills();
+        populateCache();
     }
 
     // Set the skills
