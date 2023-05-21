@@ -1,12 +1,14 @@
 package com.bankxpvalue;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Item;
 import java.awt.image.BufferedImage;
 import net.runelite.client.game.ItemManager;
@@ -14,6 +16,7 @@ import net.runelite.client.ui.overlay.components.ImageComponent;
 import lombok.AllArgsConstructor;
 import javax.inject.Inject;
 
+@Slf4j
 public class ItemDataCache {
 
     @AllArgsConstructor
@@ -37,12 +40,14 @@ public class ItemDataCache {
     private static HashMap<String, Integer> skills = new HashMap<>();
     private static HashMap<Integer, ItemData> cache = new HashMap<>();
     private final ItemManager itemManager;
+    private final Gson gson;
 
     @Inject
-    public ItemDataCache(ItemManager itemManager){
+    public ItemDataCache(ItemManager itemManager, Gson gson){
+        this.itemManager = itemManager;
+        this.gson = gson;
         mapSkills();
         populateCache();
-        this.itemManager = itemManager;
     }
 
     // Set the skills
@@ -60,12 +65,13 @@ public class ItemDataCache {
 
     // Stores json data in hashmap
     private void populateCache(){
-        final Gson gson = new Gson();
-        final InputStream itemData = ItemDataCache.class.getResourceAsStream("/item_xp_data.json");
-
-        ItemDataContainer data = gson.fromJson(new InputStreamReader(itemData, StandardCharsets.UTF_8), ItemDataContainer.class);
-        for (int i = 0; i < data.items.size(); i++) {
-            cache.put(data.items.get(i).id, data.items.get(i));
+        try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("/item_xp_data.json"), StandardCharsets.UTF_8)) {
+            ItemDataContainer data = gson.fromJson(reader, ItemDataContainer.class);
+            for (ItemData item : data.items) {
+                cache.put(item.id, item);
+            }
+        } catch (IOException e) {
+            log.warn("Failed to read item xp data", e);
         }
     }
 
