@@ -221,6 +221,11 @@
       "skill": "prayer"
     },
     {
+      "id": 28899,
+      "xp": 21,
+      "skill": "prayer"
+    },
+    {
       "id": 2349,
       "xp": 12.5,
       "skill": "smithing"
@@ -976,6 +981,21 @@
       "skill": "cooking"
     },
     {
+      "id": 2134,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 2136,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 25833,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
       "id": 4289,
       "xp": 30,
       "skill": "cooking"
@@ -1013,6 +1033,111 @@
     {
       "id": 341,
       "xp": 75,
+      "skill": "cooking"
+    },
+    {
+      "id": 11936,
+      "xp": 215,
+      "skill": "cooking"
+    },
+    {
+      "id": 29128,
+      "xp": 73,
+      "skill": "cooking"
+    },
+    {
+      "id": 29146,
+      "xp": 92,
+      "skill": "cooking"
+    },
+    {
+      "id": 29131,
+      "xp": 106,
+      "skill": "cooking"
+    },
+    {
+      "id": 29149,
+      "xp": 124,
+      "skill": "cooking"
+    },
+    {
+      "id": 29152,
+      "xp": 143,
+      "skill": "cooking"
+    },
+    {
+      "id": 29137,
+      "xp": 154,
+      "skill": "cooking"
+    },
+    {
+      "id": 29140,
+      "xp": 175,
+      "skill": "cooking"
+    },
+    {
+      "id": 29134,
+      "xp": 215,
+      "skill": "cooking"
+    },
+    {
+      "id": 29143,
+      "xp": 220,
+      "skill": "cooking"
+    },
+    {
+      "id": 10816,
+      "xp": 400,
+      "skill": "cooking"
+    },
+    {
+      "id": 9992,
+      "xp": 62,
+      "skill": "cooking"
+    },
+    {
+      "id": 1859,
+      "xp": 40,
+      "skill": "cooking"
+    },
+    {
+      "id": 24782,
+      "xp": 30,
+      "skill": "cooking"
+    },
+    {
+      "id": 6297,
+      "xp": 80,
+      "skill": "cooking"
+    },
+    {
+      "id": 6299,
+      "xp": 80,
+      "skill": "cooking"
+    },
+    {
+      "id": 7518,
+      "xp": 100,
+      "skill": "cooking"
+    },
+    {
+      "id": 2876,
+      "xp": 100,
+      "skill": "cooking"
+    },
+    {
+      "id": 7566,
+      "xp": 160,
+      "skill": "cooking"
+    },
+    {
+      "id": 2337,
+      "xp": 10,
+      "skill": "cooking"
+    },
+    {
+      "id": 2341,
+      "xp": 30,
       "skill": "cooking"
     },
     {
