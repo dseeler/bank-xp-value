@@ -2,9 +2,8 @@ package com.bankxpvalue;
 
 import net.runelite.api.*;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetID;
 import net.runelite.client.plugins.Plugin;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.events.ConfigChanged;
@@ -75,7 +74,7 @@ public class BankXpValuePlugin extends Plugin {
     @Subscribe
     public void onMenuEntryAdded(MenuEntryAdded event){
         if (event.getType() != MenuAction.CC_OP.getId() || !event.getOption().equals("Show menu")
-                || (event.getActionParam1() >> 16) != WidgetID.BANK_GROUP_ID){
+                || (event.getActionParam1() >> 16) != InterfaceID.BANKMAIN){
             return;
         }
 
@@ -100,7 +99,7 @@ public class BankXpValuePlugin extends Plugin {
     }
 
     public void onClick(MenuEntry entry){
-        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(InterfaceID.Bankmain.UNIVERSE);
         if (bank == null){
             overlayManager.remove(overlay);
             pluginToggled = false;

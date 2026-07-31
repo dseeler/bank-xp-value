@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 
 import net.runelite.api.Client;
 import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPanel;
@@ -38,13 +38,13 @@ public class BankXpValueTutorialOverlay extends OverlayPanel {
             return null;
         }
 
-        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(InterfaceID.Bankmain.UNIVERSE);
 
         if (bank == null || bank.isHidden()){
             return null;
         }
 
-        Widget button = client.getWidget(WidgetInfo.BANK_SETTINGS_BUTTON);
+        Widget button = client.getWidget(InterfaceID.Bankmain.MENU_BUTTON);
         if (button == null || button.isSelfHidden() || button.getDynamicChildren()[0].getSpriteId() != 195){
             return null;
         }

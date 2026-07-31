@@ -222,7 +222,17 @@
     },
     {
       "id": 28899,
-      "xp": 21,
+      "xp": 73.5,
+      "skill": "prayer"
+    },
+    {
+      "id": 29378,
+      "xp": 270,
+      "skill": "prayer"
+    },
+    {
+      "id": 29381,
+      "xp": 6,
       "skill": "prayer"
     },
     {
@@ -1186,6 +1196,11 @@
       "skill": "farming"
     },
     {
+      "id": 5370,
+      "xp": 481.3,
+      "skill": "farming"
+    },
+    {
       "id": 5371,
       "xp": 1481.5,
       "skill": "farming"
@@ -1201,7 +1216,7 @@
       "skill": "farming"
     },
     {
-      "id": 5734,
+      "id": 5374,
       "xp": 13913.8,
       "skill": "farming"
     },

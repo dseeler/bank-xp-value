@@ -12,7 +12,7 @@ import net.runelite.api.widgets.Widget;
 import net.runelite.client.ui.overlay.*;
 import net.runelite.client.ui.SkillColor;
 import net.runelite.client.util.ColorUtil;
-import net.runelite.api.widgets.WidgetInfo;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.client.game.SkillIconManager;
 import net.runelite.client.ui.overlay.components.*;
 import net.runelite.client.ui.overlay.tooltip.Tooltip;
@@ -69,7 +69,7 @@ public class BankXpValueOverlay extends OverlayPanel {
             resetPositionToCenter();
         }
 
-        bank = client.getWidget(WidgetInfo.BANK_CONTAINER);
+        bank = client.getWidget(InterfaceID.Bankmain.UNIVERSE);
 
         panelComponent.getChildren().clear();
 
