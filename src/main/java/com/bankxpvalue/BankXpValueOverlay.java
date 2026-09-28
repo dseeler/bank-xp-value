@@ -31,7 +31,7 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final OverlayManager overlayManager;
     private Widget bank;
 
-    private final static String[] xpTotals = new String[10];
+    private final static String[] xpTotals = new String[11];
     private final static ArrayList<PanelComponent> itemPanels = new ArrayList<>();
     private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
     private int iterationCounter = 0;
@@ -184,8 +184,13 @@ public class BankXpValueOverlay extends OverlayPanel {
                 .right("" + xpTotals[8]).build());
 
         panelComponent.getChildren().add(LineComponent.builder()
-                .left("Total: ")
+                .left("Thieving: ")
+                .leftColor(SkillColor.THIEVING.getColor().brighter().brighter())
                 .right("" + xpTotals[9]).build());
+
+        panelComponent.getChildren().add(LineComponent.builder()
+                .left("Total: ")
+                .right("" + xpTotals[10]).build());
 
         panelComponent.getChildren().add(skillsBar);
     }
@@ -204,6 +209,7 @@ public class BankXpValueOverlay extends OverlayPanel {
         skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.HERBLORE, true)));
         skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.PRAYER, true)));
         skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.SMITHING, true)));
+        skillsBar.getChildren().add(new ImageComponent(iconManager.getSkillImage(Skill.THIEVING, true)));
     }
 
     // Stores xp needed for a level up in hashmap
@@ -226,6 +232,8 @@ public class BankXpValueOverlay extends OverlayPanel {
                 + (int)Math.ceil(skillContents[7].total)) - client.getRealSkillLevel(Skill.PRAYER)));
         potentialLvlUps.put("smithing", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.SMITHING)
                 + (int)Math.ceil(skillContents[8].total)) - client.getRealSkillLevel(Skill.SMITHING)));
+        potentialLvlUps.put("thieving", colorLvlUps(Experience.getLevelForXp(client.getSkillExperience(Skill.THIEVING)
+                + (int)Math.ceil(skillContents[9].total)) - client.getRealSkillLevel(Skill.THIEVING)));
     }
 
     private String colorLvlUps(int num){
@@ -255,7 +263,7 @@ public class BankXpValueOverlay extends OverlayPanel {
 
     // Creates the hover bounds for each skill bar icon
     private Rectangle2D[] createBounds(Graphics2D graphics, int x, int y){
-        Rectangle2D[] bounds = new Rectangle2D[9];
+        Rectangle2D[] bounds = new Rectangle2D[10];
 
         for (int i = 0; i < bounds.length; i++){
             bounds[i] = new Rectangle2D.Double(x, y, 22, 25);
@@ -401,6 +409,21 @@ public class BankXpValueOverlay extends OverlayPanel {
             }
             else {
                 tooltipManager.add(new Tooltip("Smithing: " + xpTotals[8]));
+            }
+        }
+        else if (bounds[9].contains(cursor.getX(), cursor.getY())){
+            tooltipManager.clear();
+            if (itemPanels.get(9).getChildren().size() != 0){
+                String tooltip = xpTotals[9] + "xp";
+                if (config.potentialLevels())
+                    tooltip += "  |  Level-Ups: " + potentialLvlUps.get("thieving");
+                tooltip = ColorUtil.wrapWithColorTag("Thieving: ",
+                        SkillColor.THIEVING.getColor().brighter().brighter()) + tooltip;
+                tooltipManager.add(new Tooltip(tooltip));
+                tooltipManager.add(new Tooltip(itemPanels.get(9)));
+            }
+            else {
+                tooltipManager.add(new Tooltip("Thieving: " + xpTotals[9]));
             }
         }
     }

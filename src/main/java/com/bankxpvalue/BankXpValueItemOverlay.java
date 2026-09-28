@@ -117,6 +117,9 @@ public class BankXpValueItemOverlay extends Overlay {
             case "Smithing: ":
                 return ColorUtil.wrapWithColorTag("Smithing: ",
                         SkillColor.SMITHING.getColor().brighter().brighter());
+            case "Thieving: ":
+                return ColorUtil.wrapWithColorTag("Thieving: ",
+                        SkillColor.THIEVING.getColor().brighter().brighter());
         }
         return skill;
     }
