@@ -36,8 +36,9 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
     private int iterationCounter = 0;
 
-    // Icons sit this far inside the skill bar's left edge
-    private static final int SKILL_BAR_INSET = 4;
+    // Icons sit 4px inside the bar and are 6px narrower than a hover cell, so a cell
+    // starts 3px before its icon to sit centred on it: 4 - 3 = 1.
+    private static final int SKILL_BAR_INSET = 1;
 
     @Inject
     private BankXpValueOverlay(Client client, TooltipManager tooltipManager, BankXpValueConfig config,
