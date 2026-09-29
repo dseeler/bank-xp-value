@@ -1,7 +1,7 @@
 # RuneLite Bank XP Value plugin [![Plugin Installs](http://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/bank-xp-value)](https://runelite.net/plugin-hub/dseeler) [![Plugin Rank](http://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/rank/plugin/bank-xp-value)](https://runelite.net/plugin-hub)
 **All-in-one banked xp viewer + item xp tooltips**
 
-Calculates your banked xp across 9 skills and dynamically displays results in a single, condensed overlay. To promote simplicity, xp rates are fixed to the best/most popular use. Optional item xp tooltips are also included. 
+Calculates your banked xp across 10 skills and dynamically displays results in a single, condensed overlay. To promote simplicity, xp rates are fixed to the best/most popular use. Optional item xp tooltips are also included. 
 
 As of version 1.1, skill-bar tooltips also include the number of available level-ups (configurable). 
 
