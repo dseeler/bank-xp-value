@@ -61,6 +61,7 @@ public class ItemDataCache {
         skills.put("herblore", 6);
         skills.put("prayer", 7);
         skills.put("smithing", 8);
+        skills.put("thieving", 9);
     }
 
     // Stores json data in hashmap
@@ -77,7 +78,7 @@ public class ItemDataCache {
 
     // Computes the total xp for each skill
     public SkillContents[] getTotals(Item[] items){
-        SkillContents[] skillContents = new SkillContents[10];
+        SkillContents[] skillContents = new SkillContents[11];
 
         for (int i = 0; i < skillContents.length; i++){
             skillContents[i] = new SkillContents(0.0, new ArrayList<>());
@@ -89,7 +90,7 @@ public class ItemDataCache {
 
                 // Add the XP to the skill's total
                 skillContents[skills.get(data.skill)].total += data.xp * items[i].getQuantity();
-                skillContents[9].total += data.xp * items[i].getQuantity();
+                skillContents[10].total += data.xp * items[i].getQuantity();
 
                 // Add the image to the skill's tooltip
                 final BufferedImage image = itemManager.getImage(items[i].getId(), items[i].getQuantity(), true);

@@ -1729,6 +1729,26 @@
       "id": 22446,
       "xp": 155,
       "skill": "herblore"
+    },
+    {
+      "id": 10848,
+      "xp": 1350,
+      "skill": "thieving"
+    },
+    {
+      "id": 10850,
+      "xp": 2350,
+      "skill": "thieving"
+    },
+    {
+      "id": 10849,
+      "xp": 3000,
+      "skill": "thieving"
+    },
+    {
+      "id": 10851,
+      "xp": 350,
+      "skill": "thieving"
     }
   ]
 }
