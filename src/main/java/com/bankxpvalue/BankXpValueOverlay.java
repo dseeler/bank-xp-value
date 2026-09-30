@@ -36,6 +36,10 @@ public class BankXpValueOverlay extends OverlayPanel {
     private final static HashMap<String, String> potentialLvlUps = new HashMap<>();
     private int iterationCounter = 0;
 
+    // Icons sit 4px inside the bar and are 6px narrower than a hover cell, so a cell
+    // starts 3px before its icon to sit centred on it: 4 - 3 = 1.
+    private static final int SKILL_BAR_INSET = 1;
+
     @Inject
     private BankXpValueOverlay(Client client, TooltipManager tooltipManager, BankXpValueConfig config,
                                BankXpValuePlugin plugin, OverlayManager overlayManager){
@@ -106,13 +110,16 @@ public class BankXpValueOverlay extends OverlayPanel {
 
         final net.runelite.api.Point cursor = client.getMouseCanvasPosition();
 
-        if (null != getPreferredLocation()){
-            if (getBounds().getHeight() >= 200){
-                setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 183);
-            }
-            else{
-                setBounds(graphics, cursor, getPreferredLocation().x + 5, getPreferredLocation().y + 139);
-            }
+        // The hover cells have to land on the skill bar wherever it ends up. Component bounds are
+        // relative to the overlay's own origin, so they are offset from the preferred location.
+        // The literals this replaces were measured against nine skills, and drifted half an icon
+        // when a tenth was added.
+        final Rectangle barBounds = skillsBar.getBounds();
+
+        if (null != getPreferredLocation() && barBounds.width > 0){
+            setBounds(graphics, cursor,
+                    getPreferredLocation().x + barBounds.x + SKILL_BAR_INSET,
+                    getPreferredLocation().y + barBounds.y);
         }
 
         return super.render(graphics);
